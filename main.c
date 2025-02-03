@@ -35,9 +35,9 @@ void	let_it_snow(void *mlx, t_data img, void *mlx_win, int width, int height)
 	int	color;
 
 	i = x = y = 0;
-	color = 0xFFFF0000;
 	while (i++ < width * height)
 	{
+		color = get_color_for_x(x, width);
 		if (random() > RAND_MAX / 1.15)
 			my_pixel_put(&img, x, y, color);
 		x++;

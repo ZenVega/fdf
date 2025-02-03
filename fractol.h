@@ -21,3 +21,4 @@ typedef struct s_data {
 }	t_data;
 
 unsigned int	shift_to_white(unsigned int color, int shift_val);
+unsigned int	get_color_for_x(int x, int width);

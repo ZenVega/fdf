@@ -32,3 +32,19 @@ unsigned int	shift_to_white(unsigned int color, int shift_val)
 	b = b + (255 - b) * factor;
 	return ((a << 24) | (r << 16) | (g << 8) | b);
 }
+
+unsigned int	get_color_for_x(int x, int width)
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+
+	r = b = g = 0;
+	if (x < width / 2)
+		r = 255 - ((x / width / 2) * 255);
+	if (x > (width / 4) && x < width - (width / 4))
+		g = 255 - (((x - width / 4) / width / 2) * 255);
+	if (x > (width / 2))
+		b = 255 - (((x - width / 2) / width / 2) * 255);
+	return (0xFF000000 | (r << 16) | (g << 8) | b);
+}
