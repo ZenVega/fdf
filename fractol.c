@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/04 16:04:46 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:25:58 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <mlx.h>
@@ -134,10 +134,10 @@ int	main(void)
 	param.win = mlx_new_window(param.mlx, width, height, "Hello World!");
 	mlx_key_hook(param.win, on_keydown, &param);
 	mlx_hook(param.win, 25, 0L, on_resize, &param);
-	mlx_hook(param.win, 5, 1L << 5, on_button_release, &param);
-	mlx_hook(param.win, 6, 1L << 6, on_mouse_move, &param);
+	//mlx_hook(param.win, 6, 1L << 6, on_mouse_move, &param);
 	mlx_hook(param.win, 7, (1L << 4), on_mouse_enter, &param);
 	mlx_hook(param.win, 8, (1L << 5), on_mouse_leave, &param);
+	mlx_hook(param.win, 17, (1L << 17), on_close_window, &param);
 	mlx_loop_hook(param.mlx, render_frames, &param);
 	mlx_loop(param.mlx);
 }

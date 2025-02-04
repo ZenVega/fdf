@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:53:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/04 16:04:23 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/04 16:29:29 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int	on_mouse_leave(int keycode)
 	ft_printf("MouseLeave; %d\n", keycode);
 	return (0);
 }
-
-int	on_button_release(int keycode, t_param *param)
+//TODO Why segfault???
+int	on_close_window(t_param *param)
 {
-	ft_printf("Button; %d\n", keycode);
-	mlx_string_put(param->mlx, param->win, 200, 200, 0xFF8F8F8F, "press shit");
+	ft_printf("Button Close; %d\n");
+	mlx_destroy_window(param->mlx, param->win);
 	return (0);
 }
