@@ -1,6 +1,7 @@
 CFILES		= \
-			main.c\
+			fractol.c\
 			utils.c\
+			mouse_move.c\
 
 OFILES 		= $(CFILES:.c=.o)
 
@@ -16,11 +17,13 @@ INC			= \
 			-I ./$(LIBFT_PATH)\
 			-I ./$(MLX_PATH)
 
+DEPS		= fractol.h
+
 CC			= gcc
 
 CFLAGS		= -g -Wall -Wextra -Werror
 
-NAME		= fdfractal
+NAME		= fractol
 
 all: $(NAME) 
 

@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fractol.h"
+#include <mlx.h>
+#include "libft/libft.h"
+
 unsigned int	shift_to_white(unsigned int color, int shift_val)
 {
 	unsigned int	r;
@@ -36,15 +40,30 @@ unsigned int	shift_to_white(unsigned int color, int shift_val)
 unsigned int	get_color_for_x(int x, int width)
 {
 	unsigned int	r;
-	unsigned int	g;
 	unsigned int	b;
+	float			factor;
 
-	r = b = g = 0;
-	if (x < width / 2)
-		r = 255 - ((x / width / 2) * 255);
-	if (x > (width / 4) && x < width - (width / 4))
-		g = 255 - (((x - width / 4) / width / 2) * 255);
-	if (x > (width / 2))
-		b = 255 - (((x - width / 2) / width / 2) * 255);
-	return (0xFF000000 | (r << 16) | (g << 8) | b);
+	factor = (float)x / (float)width;
+	r = 255 - (factor * 255);
+	b = factor * 255;
+	return (0xFF000000 | (r << 16) | b);
+}
+
+int	create_argb(int a, int r, int g, int b)
+{
+	return (a << 24 | r << 16 | g << 8 | b);
+}
+
+int	on_keydown(int keycode, t_param *param)
+{
+	ft_printf("KeY; %d\n", keycode);
+	if (keycode == 65307)
+		mlx_destroy_window(param->mlx, param->win);
+	return (0);
+}
+
+int	on_resize(void)
+{
+	ft_printf("RESIZE\n");
+	return (0);
 }
