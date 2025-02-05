@@ -6,13 +6,11 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:39:00 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/03 15:03:23 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:57:23 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <mlx.h>
-#include "libft/libft.h"
 
 unsigned int	shift_to_white(unsigned int color, int shift_val)
 {
@@ -54,11 +52,11 @@ int	create_argb(int a, int r, int g, int b)
 	return (a << 24 | r << 16 | g << 8 | b);
 }
 
-int	on_keydown(int keycode, t_param *param)
+int	on_keydown(int keycode, t_p *p)
 {
 	ft_printf("KeY; %d\n", keycode);
 	if (keycode == 65307)
-		mlx_destroy_window(param->mlx, param->win);
+		mlx_destroy_window(p->mlx, p->win);
 	return (0);
 }
 

@@ -2,6 +2,7 @@ CFILES		= \
 			fractol.c\
 			utils.c\
 			mouse_move.c\
+			create_graphics.c\
 
 OFILES 		= $(CFILES:.c=.o)
 
