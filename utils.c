@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:39:00 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/05 11:57:23 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:23:30 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	on_keydown(int keycode, t_p *p)
 {
 	ft_printf("KeY; %d\n", keycode);
 	if (keycode == 65307)
-		mlx_destroy_window(p->mlx, p->win);
+		on_close_window(p);
 	return (0);
 }
 

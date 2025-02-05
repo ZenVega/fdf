@@ -6,15 +6,15 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/05 12:13:36 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/05 12:32:01 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
 
 void	my_pixel_put(t_data *data, int x, int y, int color)
 {
-	int			offset;
-	char		*dst;
+	int		offset;
+	char	*dst;
 
 	offset = y * data->line_length + x * (data->bits_per_pixel / 8);
 	dst = data->addr + offset;
@@ -49,6 +49,8 @@ int	render_frames(t_p *p)
 
 	col = 0xFF8F8F8F;
 	img = p->img;
+	if (img.img == NULL)
+		return (0);
 	reset_img(img, p->width, p->height);
 	let_it_snow(*p);
 	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
