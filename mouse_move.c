@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:53:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/05 12:29:28 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/05 13:33:15 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	on_mouse_leave(int keycode)
 	return (0);
 }
 
-//TODO Why segfault???
 int	on_close_window(t_p *p)
 {
 	if (p->mlx)

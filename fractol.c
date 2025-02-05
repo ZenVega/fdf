@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/05 12:32:01 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:33:04 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -54,18 +54,29 @@ int	render_frames(t_p *p)
 	reset_img(img, p->width, p->height);
 	let_it_snow(*p);
 	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
+	mlx_put_image_to_window(p->mlx, p->win, p->cursor.img, p->mouse_x, p->mouse_y);
 	mlx_string_put(p->mlx, p->win, p->mouse_x, p->mouse_y, col, "<-ok_shit");
 	return (0);
 }
-
+//TODO: Extract an slice from a sprite using my_pixel_put / get pixel at!!!
+//get a sprite, write a function that takes dimentions, start and endpoint and copies the image
+//also make all pixels of one color transparent
+// get info here: https://pulgamecanica.herokuapp.com/posts/mlx-animations
 t_p	init_img(void)
 {
 	static t_p	p;
 
+	p.mlx = mlx_init();
 	p.width = 960;
 	p.height = 540;
-	p.mlx = mlx_init();
 	p.win = mlx_new_window(p.mlx, p.width, p.height, "Wrecktal!");
+	p.cursor.file = "./graphics/bolt.xpm";
+	p.cursor.width = 200;
+	p.cursor.height = 200;
+	p.cursor.img = mlx_xpm_file_to_image(p.mlx, p.cursor.file,
+			&p.cursor.width, &p.cursor.height);
+	p.cursor.addr = mlx_get_data_addr(p.cursor.img, &p.cursor.bits_per_pixel,
+			&p.cursor.line_length, &p.cursor.endian);
 	p.img.img = mlx_new_image(p.mlx, p.width, p.height);
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bits_per_pixel,
 			&p.img.line_length, &p.img.endian);
@@ -74,7 +85,7 @@ t_p	init_img(void)
 
 int	main(void)
 {
-	t_p	p;
+	t_p			p;
 
 	p = init_img();
 	mlx_key_hook(p.win, on_keydown, &p);

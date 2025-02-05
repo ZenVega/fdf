@@ -6,12 +6,12 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/05 12:05:44 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:06:56 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# include <mlx.h>
+# include "minilibx/mlx.h"
 # include <X11/Xlib.h>
 # include <stdlib.h>
 # include "libft/libft.h"
@@ -24,14 +24,26 @@ typedef struct s_data {
 	int		endian;
 }	t_data;
 
-typedef struct s_p {
-	void	*mlx;
-	void	*win;
-	t_data	img;
+typedef struct s_cursor {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	char	*file;
 	int		width;
 	int		height;
-	int		mouse_x;
-	int		mouse_y;
+}	t_cursor;
+
+typedef struct s_p {
+	void		*mlx;
+	void		*win;
+	t_data		img;
+	t_cursor	cursor;
+	int			width;
+	int			height;
+	int			mouse_x;
+	int			mouse_y;
 }	t_p;
 
 //fractol.c
