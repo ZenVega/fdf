@@ -6,11 +6,11 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:53:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/05 13:33:15 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:49:48 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 int	on_mouse_move(int x, int y, t_p *p)
 {

@@ -6,11 +6,11 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:39:00 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/05 12:23:30 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:55:21 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#include "../includes/fractol.h"
 
 unsigned int	shift_to_white(unsigned int color, int shift_val)
 {

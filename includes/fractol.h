@@ -6,15 +6,16 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/05 16:06:56 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:09:46 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FRACTOL_H
 # define FRACTOL_H
-# include "minilibx/mlx.h"
+# include "../minilibx/mlx.h"
+# include "../libft/libft.h"
 # include <X11/Xlib.h>
 # include <stdlib.h>
-# include "libft/libft.h"
+# include <math.h>
 
 typedef struct s_data {
 	void	*img;
@@ -46,8 +47,15 @@ typedef struct s_p {
 	int			mouse_y;
 }	t_p;
 
+typedef struct s_vector {
+	int	ax;
+	int	ay;
+	int	bx;
+	int	by;
+}	t_vector;
+
 //fractol.c
-void			my_pixel_put(t_data *data, int x, int y, int color);
+void			pixel_put(t_data *data, int x, int y, int color);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);

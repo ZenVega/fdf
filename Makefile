@@ -1,8 +1,10 @@
+SRC_FOLDER	= src/
+
 CFILES		= \
 			fractol.c\
-			utils.c\
-			mouse_move.c\
-			create_graphics.c\
+			$(SRC_FOLDER)utils.c\
+			$(SRC_FOLDER)mouse_move.c\
+			$(SRC_FOLDER)create_graphics.c\
 
 OFILES 		= $(CFILES:.c=.o)
 
@@ -18,7 +20,7 @@ INC			= \
 			-I ./$(LIBFT_PATH)\
 			-I ./$(MLX_PATH)
 
-DEPS		= fractol.h
+DEPS		= includes/fractol.h
 
 CC			= gcc
 
@@ -38,18 +40,17 @@ $(MLX):
 	$(MAKE) -C $(MLX_PATH)
 
 %.o: %.c $(DEPS)
-	$(CC) $(CFLAGS) -I/usr/include $(INC) -O3 -c $< -o $@
+	$(CC) $(CFLAGS) -I/usr/include $(INC) -g -c $< -o $@
 
 clean:
-	rm -f *.o
+	rm -f $(OFILES)
+	find $(SRC_FOLDER) -name "*.o" -delete
 	$(MAKE) -C $(LIBFT_PATH) clean
 	$(MAKE) -C $(MLX_PATH) clean
 
 fclean:	clean
-	$(MAKE) clean
-	rm $(NAME)
+	rm -f $(NAME)
 	$(MAKE) -C $(LIBFT_PATH) fclean
-	$(MAKE) -C $(MLX_PATH) fclean
 
 re: fclean all
 
