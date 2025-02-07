@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 15:09:46 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:22:18 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FRACTOL_H
@@ -55,7 +55,6 @@ typedef struct s_vector {
 }	t_vector;
 
 //fractol.c
-void			pixel_put(t_data *data, int x, int y, int color);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);
@@ -72,4 +71,6 @@ int				on_close_window(t_p *param);
 //create_grafics
 void			let_it_snow(t_p param);
 void			draw_noisy_square(t_p param);
+void			draw_line(t_data *data, t_vector *vector);
+void			pixel_put(t_data *data, int x, int y, int color);
 #endif

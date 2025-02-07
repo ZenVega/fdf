@@ -1,7 +1,7 @@
 SRC_FOLDER	= src/
 
 CFILES		= \
-			fractol.c\
+			fdf.c\
 			$(SRC_FOLDER)utils.c\
 			$(SRC_FOLDER)mouse_move.c\
 			$(SRC_FOLDER)create_graphics.c\
@@ -20,13 +20,13 @@ INC			= \
 			-I ./$(LIBFT_PATH)\
 			-I ./$(MLX_PATH)
 
-DEPS		= includes/fractol.h
+DEPS		= includes/fdf.h
 
 CC			= gcc
 
 CFLAGS		= -g -Wall -Wextra -Werror
 
-NAME		= fractol
+NAME		= fdf
 
 all: $(NAME) 
 

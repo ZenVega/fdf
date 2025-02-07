@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 15:10:21 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 15:29:53 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "includes/fractol.h"
@@ -34,9 +34,14 @@ void	reset_img(t_data img, int width, int height)
 
 int	render_frames(t_p *p)
 {
-	t_data	img;
-	int		col;
+	t_data		img;
+	int			col;
+	t_vector	vector;
 
+	vector.ax = p->width / 2;
+	vector.ay = p->height / 2;
+	vector.bx = p->mouse_x;
+	vector.by = p->mouse_y;
 	col = 0xFF8F8F8F;
 	img = p->img;
 	if (img.img == NULL)
@@ -44,7 +49,7 @@ int	render_frames(t_p *p)
 	reset_img(img, p->width, p->height);
 	let_it_snow(*p);
 	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
-	mlx_put_image_to_window(p->mlx, p->win, p->cursor.img, p->mouse_x, p->mouse_y);
+	draw_line(&p->img, &vector);
 	mlx_string_put(p->mlx, p->win, p->mouse_x, p->mouse_y, col, "<-ok_shit");
 	return (0);
 }
