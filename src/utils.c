@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fdf.h"
 
 unsigned int	shift_to_white(unsigned int color, int shift_val)
 {

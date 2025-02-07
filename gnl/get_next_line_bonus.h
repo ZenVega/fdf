@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 14:14:19 by uschmidt          #+#    #+#             */
-/*   Updated: 2024/12/05 15:23:22 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 16:58:51 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "get_next_line.h"
 
 void	*ft_memmove(void *dest, const void *src, size_t n);
 char	*get_next_line(int fd);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fdf.h"
 
 void	pixel_put(t_data *data, int x, int y, int color)
 {

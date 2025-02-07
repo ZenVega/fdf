@@ -6,11 +6,12 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 12:41:37 by uschmidt          #+#    #+#             */
-/*   Updated: 2024/12/04 16:32:46 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:07:52 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include "../includes/fdf.h"
 
 int	get_newline_chr(char *str)
 {
@@ -36,7 +37,7 @@ char	*merge_strs(char *first, char *second)
 	if (first)
 		first_len = ft_strlen(first);
 	second_len = ft_strlen(second);
-	result = ft_calloc(first_len + second_len + 1);
+	result = ft_calloc(first_len + second_len + 1, 1);
 	if (!result)
 		return (NULL);
 	if (first)
@@ -53,7 +54,7 @@ char	*read_to_nl(int fd, char *buffer)
 	ssize_t	read_bytes;
 	char	*read_str;
 
-	read_str = ft_calloc(BUFFER_SIZE + 1);
+	read_str = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (!read_str)
 		return (NULL);
 	read_bytes = 1;
@@ -84,7 +85,7 @@ char	*extract_line(char *buffer)
 	nl = get_newline_chr(buffer) + 1;
 	if (!nl)
 		nl = ft_strlen(buffer);
-	line = ft_calloc(nl + 1);
+	line = ft_calloc(nl + 1, 1);
 	if (!line)
 	{
 		buffer = NULL;
@@ -105,7 +106,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!buffer)
 	{
-		buffer = ft_calloc(1);
+		buffer = ft_calloc(1, 1);
 		if (!buffer)
 			return (NULL);
 		buffer[0] = 0;

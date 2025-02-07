@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
+/*   map_processing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/19 10:35:18 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 17:25:16 by uschmidt         ###   ########.fr       */
+/*   Created: 2025/02/07 16:19:01 by uschmidt          #+#    #+#             */
+/*   Updated: 2025/02/07 17:24:08 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/fdf.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new_lst)
+int	load_map(t_list **map, char **argv)
 {
+	int		fd;
 	t_list	*tmp;
+	char	*path;
+	char	*line;
 
-	if (!new_lst)
-		return ;
-	if (!*lst)
+	path = ft_strjoin("./maps/", argv[1]);
+	fd = open(path, O_RDONLY);
+	free(path);
+	if (fd == -1)
+		return (0);
+	while (1)
 	{
-		*lst = new_lst;
-		return ;
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		tmp = ft_lstnew(line);
+		if (tmp == NULL)
+			return (ft_lstclear(map, free), 0);
+		ft_lstadd_back(map, tmp);
 	}
-	if (!*lst && !new_lst)
-		return ;
-	tmp = ft_lstlast(*lst);
-	tmp->next = new_lst;
+	return (1);
 }

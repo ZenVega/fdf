@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 12:43:28 by uschmidt          #+#    #+#             */
-/*   Updated: 2024/12/04 14:32:24 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:25:16 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,6 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-void	*ft_calloc(size_t size)
-{
-	unsigned char	*ptr;
-	unsigned int	i;
-
-	if (size <= 0)
-		return (NULL);
-	ptr = (unsigned char *)malloc(sizeof(char) * size);
-	if (!ptr)
-		return (NULL);
-	i = 0;
-	while (i < size)
-		ptr[i++] = 0;
-	return (ptr);
 }
 
 char	*free_all(char **first, char **second)

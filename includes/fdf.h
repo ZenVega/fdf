@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 15:22:18 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:24:20 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#ifndef FDF_H
+# define FDF_H
+
 # include "../minilibx/mlx.h"
 # include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 # include <X11/Xlib.h>
 # include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 # include <math.h>
 
 typedef struct s_data {
@@ -54,7 +58,8 @@ typedef struct s_vector {
 	int	by;
 }	t_vector;
 
-//fractol.c
+//map_processing.c
+int				load_map(t_list **map, char **argv);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);
@@ -73,4 +78,5 @@ void			let_it_snow(t_p param);
 void			draw_noisy_square(t_p param);
 void			draw_line(t_data *data, t_vector *vector);
 void			pixel_put(t_data *data, int x, int y, int color);
+
 #endif

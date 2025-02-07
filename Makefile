@@ -2,9 +2,12 @@ SRC_FOLDER	= src/
 
 CFILES		= \
 			fdf.c\
+			$(SRC_FOLDER)map_processing.c\
 			$(SRC_FOLDER)utils.c\
 			$(SRC_FOLDER)mouse_move.c\
 			$(SRC_FOLDER)create_graphics.c\
+			gnl/get_next_line.c\
+			gnl/get_next_line_utils.c\
 
 OFILES 		= $(CFILES:.c=.o)
 
@@ -20,7 +23,8 @@ INC			= \
 			-I ./$(LIBFT_PATH)\
 			-I ./$(MLX_PATH)
 
-DEPS		= includes/fdf.h
+DEPS		= includes/fdf.h\
+			  gnl/get_next_line.h
 
 CC			= gcc
 
@@ -34,7 +38,7 @@ $(NAME): $(OFILES) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(MLX) $(LIBFT) $(INC) -lXext -lX11 -lm -lz
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_PATH)
+	$(MAKE) bonus -C $(LIBFT_PATH)
 
 $(MLX):
 	$(MAKE) -C $(MLX_PATH)

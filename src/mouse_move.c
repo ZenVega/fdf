@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/fdf.h"
 
 int	on_mouse_move(int x, int y, t_p *p)
 {

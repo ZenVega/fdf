@@ -1,15 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.c                                          :+:      :+:    :+:   */
+/*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 15:29:53 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/07 17:23:51 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "includes/fractol.h"
+#include "includes/fdf.h"
 
 void	reset_img(t_data img, int width, int height)
 {
@@ -54,10 +54,6 @@ int	render_frames(t_p *p)
 	return (0);
 }
 
-//TODO: Extract an slice from a sprite using pixel_put / get pixel at!!!
-//get a sprite, write a function that takes dimentions, start and endpoint and copies the image
-//also make all pixels of one color transparent
-// get info here: https://pulgamecanica.herokuapp.com/posts/mlx-animations
 t_p	init_img(void)
 {
 	static t_p	p;
@@ -79,10 +75,21 @@ t_p	init_img(void)
 	return (p);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_p			p;
+	t_list		*map;
 
+	map = NULL;
+	if (argc != 2)
+		return (ft_printf("No Map"), 0);
+	if (!load_map(&map, argv))
+		return (ft_printf("No Map"), 0);
+	while (map)
+	{
+		ft_printf("%s\n", map->content);
+		map = map->next;
+	}
 	p = init_img();
 	mlx_key_hook(p.win, on_keydown, &p);
 	mlx_hook(p.win, 25, 0L, on_resize, &p);
