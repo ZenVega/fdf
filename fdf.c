@@ -75,6 +75,16 @@ t_p	init_img(void)
 	return (p);
 }
 
+void	init_hooks(t_p *p)
+{
+	mlx_key_hook(p->win, on_keydown, p);
+	mlx_hook(p->win, 25, 0L, on_resize, p);
+	mlx_hook(p->win, 6, 1L << 6, on_mouse_move, p);
+	mlx_hook(p->win, 7, (1L << 4), on_mouse_enter, p);
+	mlx_hook(p->win, 8, (1L << 5), on_mouse_leave, p);
+	mlx_hook(p->win, 17, (1L << 17), on_close_window, p);
+}
+
 int	main(int argc, char **argv)
 {
 	t_p			p;
@@ -91,12 +101,7 @@ int	main(int argc, char **argv)
 		map = map->next;
 	}
 	p = init_img();
-	mlx_key_hook(p.win, on_keydown, &p);
-	mlx_hook(p.win, 25, 0L, on_resize, &p);
-	mlx_hook(p.win, 6, 1L << 6, on_mouse_move, &p);
-	mlx_hook(p.win, 7, (1L << 4), on_mouse_enter, &p);
-	mlx_hook(p.win, 8, (1L << 5), on_mouse_leave, &p);
-	mlx_hook(p.win, 17, (1L << 17), on_close_window, &p);
+	init_hooks(&p);
 	mlx_loop_hook(p.mlx, render_frames, &p);
 	mlx_loop(p.mlx);
 }
