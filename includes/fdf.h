@@ -58,8 +58,17 @@ typedef struct s_vector {
 	int	by;
 }	t_vector;
 
+typedef struct s_map {
+	int		len_x;
+	int		len_y;
+	int		highest_z;
+	int		lowest_z;
+	t_list	*matrix;
+}	t_map;
+
 //map_processing.c
-int				load_map(t_list **map, char **argv);
+int				load_data(t_list **data, char **argv);
+t_map			*create_map_matrix(t_list *data);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);

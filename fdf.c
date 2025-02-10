@@ -88,18 +88,19 @@ void	init_hooks(t_p *p)
 int	main(int argc, char **argv)
 {
 	t_p			p;
-	t_list		*map;
+	t_list		*data;
+	t_map		*map;
+	int			i;
 
-	map = NULL;
+	data = NULL;
 	if (argc != 2)
 		return (ft_printf("No Map"), 0);
-	if (!load_map(&map, argv))
+	if (!load_data(&data, argv))
 		return (ft_printf("No Map"), 0);
-	while (map)
-	{
-		ft_printf("%s\n", map->content);
-		map = map->next;
-	}
+	map = create_map_matrix(data);
+	i = 0;
+	while (i < 20)
+		ft_printf("%d\n", map->matrix[i]);
 	p = init_img();
 	init_hooks(&p);
 	mlx_loop_hook(p.mlx, render_frames, &p);
