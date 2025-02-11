@@ -35,11 +35,5 @@ int	on_close_window(t_p *p)
 {
 	if (p->mlx)
 		mlx_loop_end(p->mlx);
-	if (p->img.img)
-		mlx_destroy_image(p->mlx, p->img.img);
-	p->img.img = NULL;
-	if (p->win)
-		mlx_destroy_window(p->mlx, p->win);
-	p->win = NULL;
 	return (0);
 }

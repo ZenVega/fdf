@@ -85,6 +85,19 @@ void	init_hooks(t_p *p)
 	mlx_hook(p->win, 17, (1L << 17), on_close_window, p);
 }
 
+void	close_program(t_p *p)
+{
+	if (p->img.img)
+		mlx_destroy_image(p->mlx, p->img.img);
+	mlx_destroy_image(p->mlx, p->cursor.img);
+	p->img.img = NULL;
+	if (p->win)
+		mlx_destroy_window(p->mlx, p->win);
+	mlx_destroy_display(p->mlx);
+	free(p->mlx);
+	p->mlx = NULL;
+}
+
 int	main(int argc, char **argv)
 {
 	t_p			p;
@@ -115,5 +128,6 @@ int	main(int argc, char **argv)
 	init_hooks(&p);
 	mlx_loop_hook(p.mlx, render_frames, &p);
 	mlx_loop(p.mlx);
+	close_program(&p);
 	clean_up(map, NULL);
 }
