@@ -75,17 +75,7 @@ t_p	init_img(void)
 	return (p);
 }
 
-void	init_hooks(t_p *p)
-{
-	mlx_key_hook(p->win, on_keydown, p);
-	mlx_hook(p->win, 25, 0L, on_resize, p);
-	mlx_hook(p->win, 6, 1L << 6, on_mouse_move, p);
-	mlx_hook(p->win, 7, (1L << 4), on_mouse_enter, p);
-	mlx_hook(p->win, 8, (1L << 5), on_mouse_leave, p);
-	mlx_hook(p->win, 17, (1L << 17), on_close_window, p);
-}
-
-void	close_program(t_p *p)
+void	close_program(t_p *p, t_map *map)
 {
 	if (p->img.img)
 		mlx_destroy_image(p->mlx, p->img.img);
@@ -96,6 +86,7 @@ void	close_program(t_p *p)
 	mlx_destroy_display(p->mlx);
 	free(p->mlx);
 	p->mlx = NULL;
+	clean_up(map, NULL);
 }
 
 int	main(int argc, char **argv)
@@ -112,14 +103,14 @@ int	main(int argc, char **argv)
 	j = load_data(&data, argv);
 	if (!j)
 		return (ft_printf("No Map"), 0);
-	map = create_map_matrix(data, j);
+	map = init_map(data, j);
 	j = 0;
 	while (j < map->height)
 	{
 		i = 0;
 		while (i < map->length)
 		{
-			ft_printf("%d | ", map->matrix[j][i++]);
+			ft_printf("%d | ", map->matrix[j][i++].z);
 		}
 		ft_printf("\n");
 		j++;
@@ -128,6 +119,5 @@ int	main(int argc, char **argv)
 	init_hooks(&p);
 	mlx_loop_hook(p.mlx, render_frames, &p);
 	mlx_loop(p.mlx);
-	close_program(&p);
-	clean_up(map, NULL);
+	close_program(&p, map);
 }

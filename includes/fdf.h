@@ -58,29 +58,37 @@ typedef struct s_vector {
 	int	by;
 }	t_vector;
 
+typedef struct s_point {
+	int		x;
+	int		y;
+	int		z;
+	float	proj_x;
+	float	proj_y;
+}	t_point;
+
 typedef struct s_map {
 	int		length;
 	int		height;
 	int		highest_z;
 	int		lowest_z;
-	int		**matrix;
+	t_point	**matrix;
 }	t_map;
 
 //map_processing.c
-void			clean_up(t_map *map, t_list *data);
 int				load_data(t_list **data, char **argv);
-t_map			*create_map_matrix(t_list *data, int height);
+t_map			*create_map_matrix(t_list *data, t_map *map);
+t_map			*init_map(t_list *data, int height);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);
 unsigned int	get_color_for_x(int x, int width);
 int				on_keydown(int keycode, t_p *param);
 int				on_resize(void);
+void			clean_up(t_map *map, t_list *data);
 
-//mouse_move.c
+//hooks.c
+void			init_hooks(t_p *p);
 int				on_mouse_move(int x, int y, t_p *param);
-int				on_mouse_enter(int keycode);
-int				on_mouse_leave(int keycode);
 int				on_close_window(t_p *param);
 
 //create_graphics

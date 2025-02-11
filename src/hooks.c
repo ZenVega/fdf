@@ -12,22 +12,17 @@
 
 #include "../includes/fdf.h"
 
+void	init_hooks(t_p *p)
+{
+	mlx_key_hook(p->win, on_keydown, p);
+	mlx_hook(p->win, 6, 1L << 6, on_mouse_move, p);
+	mlx_hook(p->win, 17, (1L << 17), on_close_window, p);
+}
+
 int	on_mouse_move(int x, int y, t_p *p)
 {
 	p->mouse_x = x;
 	p->mouse_y = y;
-	return (0);
-}
-
-int	on_mouse_enter(int keycode)
-{
-	ft_printf("MouseEnter; %d\n", keycode);
-	return (0);
-}
-
-int	on_mouse_leave(int keycode)
-{
-	ft_printf("MouseLeave; %d\n", keycode);
 	return (0);
 }
 

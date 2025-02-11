@@ -75,62 +75,49 @@ int	get_map_width(char *line)
 	return (count);
 }
 
-void	clean_up(t_map *map, t_list *data)
+t_map	*create_map_matrix(t_list *data, t_map *map)
 {
-	int	i;
-
-	ft_lstclear(&data, free);
-	if (data)
-		(free(data), data = NULL);
-	if (map && map->matrix)
-	{
-		i = 0;
-		while (i < map->height && map->matrix[i])
-			free(map->matrix[i++]);
-		(free(map->matrix), map->matrix = NULL);
-	}
-	if (map)
-		(free(map), map = NULL);
-}
-
-t_map	*create_map_matrix(t_list *data, int height)
-{
-	t_map	*map;
-	t_list	*tmp;
 	int		i;
 	int		j;
 	char	**vals;
 
-	tmp = data;
-	map = (t_map *)malloc(sizeof(t_map));
-	if (!map)
-		return (clean_up(map, data), NULL);
-	map->matrix = (int **)malloc(sizeof(int *) * height);
-	if (!map->matrix)
-		return (clean_up(map, data), NULL);
-	map->length = get_map_width(data->content);
-	map->height = height;
 	j = 0;
 	while (data)
 	{
-		map->matrix[j] = (int *)malloc(sizeof(int) * map->length);
+		map->matrix[j] = (t_point *)malloc(sizeof(t_point) * map->length);
 		if (!map->matrix[j])
 			return (clean_up(map, data), NULL);
 		i = 0;
 		vals = ft_split(data->content, ' ');
 		while (vals[i])
 		{
-			map->matrix[j][i] = ft_atoi(vals[i]);
+			map->matrix[j][i].x = i;
+			map->matrix[j][i].y = j;
+			map->matrix[j][i].z = ft_atoi(vals[i]);
 			free(vals[i++]);
 		}
 		free(vals);
 		j++;
 		data = data->next;
 	}
-	clean_up(NULL, tmp);
 	return (map);
 }
 
-void	create_projection(void)
+t_map	*init_map(t_list *data, int height)
 {
+	t_map	*map;
+	t_list	*tmp;
+
+	tmp = data;
+	map = (t_map *)malloc(sizeof(t_map));
+	if (!map)
+		return (clean_up(map, data), NULL);
+	map->matrix = (t_point **)malloc(sizeof(t_point *) * height);
+	if (!map->matrix)
+		return (clean_up(map, data), NULL);
+	map->length = get_map_width(data->content);
+	map->height = height;
+	map = create_map_matrix(data, map);
+	clean_up(NULL, tmp);
+	return (map);
 }

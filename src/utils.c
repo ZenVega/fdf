@@ -60,8 +60,21 @@ int	on_keydown(int keycode, t_p *p)
 	return (0);
 }
 
-int	on_resize(void)
+void	clean_up(t_map *map, t_list *data)
 {
-	ft_printf("RESIZE\n");
-	return (0);
+	int	i;
+
+	ft_lstclear(&data, free);
+	if (data)
+		(free(data), data = NULL);
+	if (map && map->matrix)
+	{
+		i = 0;
+		while (i < map->height && map->matrix[i])
+			free(map->matrix[i++]);
+		(free(map->matrix), map->matrix = NULL);
+	}
+	if (map)
+		(free(map), map = NULL);
 }
+
