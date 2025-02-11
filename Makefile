@@ -2,10 +2,11 @@ SRC_FOLDER	= src/
 
 CFILES		= \
 			fdf.c\
+			$(SRC_FOLDER)create_graphics.c\
+			$(SRC_FOLDER)draw_map.c\
+			$(SRC_FOLDER)hooks.c\
 			$(SRC_FOLDER)map_processing.c\
 			$(SRC_FOLDER)utils.c\
-			$(SRC_FOLDER)hooks.c\
-			$(SRC_FOLDER)create_graphics.c\
 			gnl/get_next_line.c\
 			gnl/get_next_line_utils.c\
 

@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:20:32 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 15:13:00 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:37:54 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	pixel_put(t_data *data, int x, int y, int color)
 
 	offset = y * data->line_length + x * (data->bits_per_pixel / 8);
 	dst = data->addr + offset;
-	*(unsigned int *)dst = color;
+	* (unsigned int *)dst = color;
 }
 
 void	draw_line(t_data *data, t_vector *vector)
@@ -46,7 +46,7 @@ void	draw_line(t_data *data, t_vector *vector)
 	}
 }
 
-void	let_it_snow(t_p p)
+void	let_it_snow(t_p *p)
 {
 	int	i;
 	int	x;
@@ -56,13 +56,13 @@ void	let_it_snow(t_p p)
 	i = 0;
 	x = 0;
 	y = 0;
-	while (i++ < p.width * p.height)
+	while (i++ < p->width * p->height)
 	{
-		color = get_color_for_x(x, p.width);
+		color = get_color_for_x(x, p->width);
 		if (random() > RAND_MAX / 1.15)
-			pixel_put(&p.img, x, y, color);
+			pixel_put(&p->img, x, y, color);
 		x++;
-		if (x > p.width)
+		if (x > p->width)
 		{
 			y++;
 			x = 0;
@@ -89,5 +89,14 @@ void	draw_noisy_square(t_p p)
 			x = 0;
 		}
 	}
-	mlx_put_image_to_window(p.mlx, p.win, p.img.img, 0, 0);
+}
+void	draw_mouse_vector(t_p *p)
+{
+	t_vector	vector;
+
+	vector.ax = p->width / 2;
+	vector.ay = p->height / 2;
+	vector.bx = p->mouse_x;
+	vector.by = p->mouse_y;
+	draw_line(&p->img, &vector);
 }
