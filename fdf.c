@@ -91,18 +91,29 @@ int	main(int argc, char **argv)
 	t_list		*data;
 	t_map		*map;
 	int			i;
+	int			j;
 
 	data = NULL;
 	if (argc != 2)
 		return (ft_printf("No Map"), 0);
-	if (!load_data(&data, argv))
+	j = load_data(&data, argv);
+	if (!j)
 		return (ft_printf("No Map"), 0);
-	map = create_map_matrix(data);
-	i = 0;
-	while (i < 20)
-		ft_printf("%d\n", map->matrix[i]);
+	map = create_map_matrix(data, j);
+	j = 0;
+	while (j < map->height)
+	{
+		i = 0;
+		while (i < map->length)
+		{
+			ft_printf("%d | ", map->matrix[j][i++]);
+		}
+		ft_printf("\n");
+		j++;
+	}
 	p = init_img();
 	init_hooks(&p);
 	mlx_loop_hook(p.mlx, render_frames, &p);
 	mlx_loop(p.mlx);
+	clean_up(map, NULL);
 }

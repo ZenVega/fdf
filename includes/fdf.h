@@ -59,16 +59,17 @@ typedef struct s_vector {
 }	t_vector;
 
 typedef struct s_map {
-	int		len_x;
-	int		len_y;
+	int		length;
+	int		height;
 	int		highest_z;
 	int		lowest_z;
-	t_list	*matrix;
+	int		**matrix;
 }	t_map;
 
 //map_processing.c
+void			clean_up(t_map *map, t_list *data);
 int				load_data(t_list **data, char **argv);
-t_map			*create_map_matrix(t_list *data);
+t_map			*create_map_matrix(t_list *data, int height);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);
@@ -82,7 +83,7 @@ int				on_mouse_enter(int keycode);
 int				on_mouse_leave(int keycode);
 int				on_close_window(t_p *param);
 
-//create_grafics
+//create_graphics
 void			let_it_snow(t_p param);
 void			draw_noisy_square(t_p param);
 void			draw_line(t_data *data, t_vector *vector);
