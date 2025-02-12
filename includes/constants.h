@@ -13,6 +13,9 @@
 #define WIN_WIDTH 1920
 #define WIN_HEIGHT 1080
 #define PADDING 10 //in %
+#define COL_ZERO 0xFFFFFFFF
+#define COL_HIGH 0xFF39FF14
+#define COL_LOW 0xFFFF14AF
 
 typedef struct s_img {
 	void	*img;

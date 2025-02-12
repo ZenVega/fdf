@@ -58,7 +58,7 @@ void	gen_noise(t_p *p)
 	y = 0;
 	while (i++ < p->width * p->height)
 	{
-		color = get_color_for_x(x, p->width);
+		color = get_grad_col(x, p->width, 0xFFFF0000, 0xFF0000FF);
 		if (random() > RAND_MAX / 1.15)
 			pixel_put(&p->img, x, y, color);
 		x++;

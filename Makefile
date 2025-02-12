@@ -35,6 +35,9 @@ NAME		= fdf
 
 all: $(NAME) 
 
+debug: $(NAME)
+	gdb --args ./fdf 42.fdf
+
 $(NAME): $(OFILES) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(MLX) $(LIBFT) $(INC) -lXext -lX11 -lm -lz
 

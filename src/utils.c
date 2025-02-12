@@ -35,16 +35,22 @@ unsigned int	shift_to_white(unsigned int color, int shift_val)
 	return ((a << 24) | (r << 16) | (g << 8) | b);
 }
 
-unsigned int	get_color_for_x(int x, int width)
+unsigned int	get_grad_col(int val, int max, unsigned int c_min, unsigned int c_max)
 {
-	unsigned int	r;
-	unsigned int	b;
+	int				d_r;
+	int				d_g;
+	int				d_b;
 	float			factor;
 
-	factor = (float)x / (float)width;
-	r = 255 - (factor * 255);
-	b = factor * 255;
-	return (0xFF000000 | (r << 16) | b);
+	factor = (float)val / (float)max;
+	d_r = ((c_max & (0xFF << 16)) >> 16) - ((c_min & (0xFF << 16)) >> 16);
+	d_g = ((c_max & (0xFF << 8)) >> 8) - ((c_min & (0xFF << 8)) >> 8);
+	d_b = (c_max & 0xFF) - (c_min & 0xFF);
+	return (
+		(0xFF << 24) 
+		| (((c_min & (0xFF << 16)) + (int)(factor * d_r)) << 16)
+		| (((c_min & (0xFF << 8)) + (int)(factor * d_g)) << 8)
+		| ((c_min & 0xFF) + (int)(factor * d_b)));
 }
 
 int	create_argb(int a, int r, int g, int b)

@@ -29,7 +29,7 @@ t_map			*init_map(t_list *data, int height);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);
-unsigned int	get_color_for_x(int x, int width);
+unsigned int	get_grad_col(int val, int max, unsigned int c_min, unsigned int c_max);
 int				on_resize(void);
 void			clean_up(t_map *map, t_list *data);
 
