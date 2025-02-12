@@ -6,55 +6,74 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:19:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 17:24:08 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:55:30 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 #include <limits.h>
 
-void	remove_nl(char *line)
+void	color_matrix(t_map *map)
 {
-	int	i;
+	int		x;
+	int		y;
+	t_point	**matrix;
 
-	if (!line)
-		return ;
-	i = 0;
-	while (line[i])
+	x = 0;
+	matrix = map->matrix;
+	while (x < map->width)
 	{
-		if (line[i] == '\n')
-			line[i] = 0;
-		i++;
+		y = 0;
+		while (y < map->depth)
+		{
+			if (matrix[y][x].z >= 0)
+				matrix[y][x].color = get_grad_col(matrix[y][x].z,
+						map->highest_z, C_ZERO, C_HIGH);
+			else
+				matrix[y][x].color = get_grad_col(matrix[y][x].z,
+						map->lowest_z, C_ZERO, C_LOW);
+			y++;
+		}
+		x++;
 	}
 }
 
-int	load_data(t_list **data, char **argv)
+static void	create_point(t_map *map, int x, int y, char **vals)
 {
-	int		fd;
-	t_list	*tmp;
-	char	*path;
-	char	*line;
-	int		height;
+	t_point	*dest;
 
-	path = ft_strjoin("./maps/", argv[1]);
-	fd = open(path, O_RDONLY);
-	free(path);
-	if (fd == -1)
-		return (0);
-	height = 0;
-	while (1)
+	dest = &map->matrix[y][x];
+	dest->x = x;
+	dest->y = y;
+	dest->z = ft_atoi(vals[x]);
+	if (dest->z > map->highest_z)
+		map->highest_z = dest->z;
+	if (dest->z < map->lowest_z)
+		map->lowest_z = dest->z;
+	free(vals[x]);
+}
+
+t_map	*create_map_matrix(t_list *data, t_map *map)
+{
+	int		x;
+	int		y;
+	char	**vals;
+
+	y = 0;
+	while (data)
 	{
-		line = get_next_line(fd);
-		remove_nl(line);
-		if (line == NULL)
-			break ;
-		tmp = ft_lstnew(line);
-		if (tmp == NULL)
-			return (ft_lstclear(data, free), 0);
-		ft_lstadd_back(data, tmp);
-		height++;
+		map->matrix[y] = (t_point *)malloc(sizeof(t_point) * map->width);
+		if (!map->matrix[y])
+			return (clean_up(map, data), NULL);
+		x = -1;
+		vals = ft_split(data->content, ' ');
+		while (vals[++x])
+			create_point(map, x, y, vals);
+		free(vals);
+		y++;
+		data = data->next;
 	}
-	return (height);
+	return (map);
 }
 
 int	get_map_width(char *line)
@@ -74,59 +93,4 @@ int	get_map_width(char *line)
 		}
 	}
 	return (count);
-}
-
-t_map	*create_map_matrix(t_list *data, t_map *map)
-{
-	int		i;
-	int		j;
-	char	**vals;
-	int		lowest;
-	int		highest;
-
-	highest = INT_MIN;
-	lowest = INT_MAX;
-	j = 0;
-	while (data)
-	{
-		map->matrix[j] = (t_point *)malloc(sizeof(t_point) * map->width);
-		if (!map->matrix[j])
-			return (clean_up(map, data), NULL);
-		i = 0;
-		vals = ft_split(data->content, ' ');
-		while (vals[i])
-		{
-			map->matrix[j][i].x = i;
-			map->matrix[j][i].y = j;
-			map->matrix[j][i].z = ft_atoi(vals[i]);
-			if (map->matrix[j][i].z > highest)
-				highest = map->matrix[j][i].z;
-			if (map->matrix[j][i].z < lowest)
-				lowest = map->matrix[j][i].z;
-			free(vals[i++]);
-		}
-		free(vals);
-		j++;
-		data = data->next;
-	}
-	return (map);
-}
-
-t_map	*init_map(t_list *data, int height)
-{
-	t_map	*map;
-	t_list	*tmp;
-
-	tmp = data;
-	map = (t_map *)malloc(sizeof(t_map));
-	if (!map)
-		return (clean_up(map, data), NULL);
-	map->matrix = (t_point **)malloc(sizeof(t_point *) * height);
-	if (!map->matrix)
-		return (clean_up(map, data), NULL);
-	map->width = get_map_width(data->content);
-	map->depth = height;
-	map = create_map_matrix(data, map);
-	clean_up(NULL, tmp);
-	return (map);
 }

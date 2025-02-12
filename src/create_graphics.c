@@ -6,13 +6,13 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:20:32 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/11 17:37:54 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:53:56 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	pixel_put(t_img *img, int x, int y, int color)
+void	pixel_put(t_img *img, int x, int y, unsigned int color)
 {
 	int		offset;
 	char	*dst;
@@ -22,27 +22,40 @@ void	pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	draw_line(t_img *img, t_point a, t_point b)
+double absd(double a)
 {
-	double	delta_x;
-	double	delta_y;
-	int		pixels;
-	double	pixel_x;
-	double	pixel_y;
+	if (a > 0.0)
+		return (a);
+	return (-a);
+}
 
-	delta_x = b.proj_x - a.proj_x;
-	delta_y = b.proj_y - a.proj_y;
-	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
-	delta_x /= pixels;
-	delta_y /= pixels;
-	pixel_x = a.proj_x;
-	pixel_y = a.proj_y;
-	while (pixels)
+void	draw_line(t_p *p, t_point a, t_point b)
+{
+	t_vector		v;
+	int				pixels;
+	unsigned int	color;
+	int				i;
+
+	v.delta_x = b.proj_x - a.proj_x;
+	v.delta_y = b.proj_y - a.proj_y;
+	if (v.delta_x > v.delta_y)
+		pixels = v.delta_x;
+	else
+		pixels = v.delta_y;
+	//TODO: rename delta
+	v.delta_x /= pixels;
+	v.delta_y /= pixels;
+	v.delta_z = ((b.z - a.z) / (double)pixels);
+	v.pixel_x = a.proj_x;
+	v.pixel_y = a.proj_y;
+	i = 0;
+	while (i < pixels)
 	{
-		pixel_put(img, pixel_x, pixel_y, 0xFFFFFFFF);
-		pixel_x += delta_x;
-		pixel_y += delta_y;
-		--pixels;
+		color = get_grad_col(i, pixels, a.color, b.color);
+		pixel_put(&p->img, (int)v.pixel_x, (int)v.pixel_y, color);
+		v.pixel_x += v.delta_x;
+		v.pixel_y += v.delta_y;
+		i++;
 	}
 }
 

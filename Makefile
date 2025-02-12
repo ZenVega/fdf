@@ -5,6 +5,8 @@ CFILES		= \
 			$(SRC_FOLDER)create_graphics.c\
 			$(SRC_FOLDER)draw_map.c\
 			$(SRC_FOLDER)hooks.c\
+			$(SRC_FOLDER)inits.c\
+			$(SRC_FOLDER)input_processing.c\
 			$(SRC_FOLDER)map_processing.c\
 			$(SRC_FOLDER)utils.c\
 			gnl/get_next_line.c\

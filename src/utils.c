@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 14:39:00 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 14:55:21 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:19:43 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,22 @@ unsigned int	shift_to_white(unsigned int color, int shift_val)
 	return ((a << 24) | (r << 16) | (g << 8) | b);
 }
 
-unsigned int	get_grad_col(int val, int max, unsigned int c_min, unsigned int c_max)
+unsigned int	get_grad_col(int val, int max,
+		unsigned int c_min, unsigned int c_max)
 {
-	int				d_r;
-	int				d_g;
-	int				d_b;
-	float			factor;
+	int		d_r;
+	int		d_g;
+	int		d_b;
+	float	factor;
 
 	factor = (float)val / (float)max;
-	d_r = ((c_max & (0xFF << 16)) >> 16) - ((c_min & (0xFF << 16)) >> 16);
-	d_g = ((c_max & (0xFF << 8)) >> 8) - ((c_min & (0xFF << 8)) >> 8);
+	d_r = (c_max >> 16 & 0xFF) - (c_min >> 16 & 0xFF);
+	d_g = (c_max >> 8 & 0xFF) - (c_min >> 8 & 0xFF);
 	d_b = (c_max & 0xFF) - (c_min & 0xFF);
 	return (
-		(0xFF << 24) 
-		| (((c_min & (0xFF << 16)) + (int)(factor * d_r)) << 16)
-		| (((c_min & (0xFF << 8)) + (int)(factor * d_g)) << 8)
+		(0xFF << 24)
+		| ((c_min >> 16 & 0xFF) + (int)(factor * d_r)) << 16
+		| ((c_min >> 8 & 0xFF) + (int)(factor * d_g)) << 8
 		| ((c_min & 0xFF) + (int)(factor * d_b)));
 }
 

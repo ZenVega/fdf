@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/11 17:34:55 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:43:56 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "includes/fdf.h"
@@ -51,21 +51,6 @@ int	render_frames(t_p *p)
 	return (0);
 }
 
-t_p	init_img(void)
-{
-	static t_p	p;
-
-	p.mlx = mlx_init();
-	p.noise = 1;
-	p.width = WIN_WIDTH;
-	p.height = WIN_HEIGHT;
-	p.win = mlx_new_window(p.mlx, p.width, p.height, "Wrecktal!");
-	p.img.img = mlx_new_image(p.mlx, p.width, p.height);
-	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bits_per_pixel,
-			&p.img.line_length, &p.img.endian);
-	return (p);
-}
-
 void	close_program(t_p *p, t_map *map)
 {
 	if (p->img.img)
@@ -105,7 +90,7 @@ int	main(int argc, char **argv)
 	}
 	p = init_img();
 	p.map = map;
-	init_hooks(&p);
+	init_input_hooks(&p);
 	mlx_loop_hook(p.mlx, render_frames, &p);
 	mlx_loop(p.mlx);
 	close_program(&p, map);
