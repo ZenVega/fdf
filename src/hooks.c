@@ -32,3 +32,13 @@ int	on_close_window(t_p *p)
 		mlx_loop_end(p->mlx);
 	return (0);
 }
+
+int	on_keydown(int keycode, t_p *p)
+{
+	ft_printf("KeY; %d\n", keycode);
+	if (keycode == 65307)
+		on_close_window(p);
+	if (keycode == 110)
+		p->noise = -p->noise;
+	return (0);
+}

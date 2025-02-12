@@ -30,7 +30,6 @@ t_map			*init_map(t_list *data, int height);
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);
 unsigned int	get_color_for_x(int x, int width);
-int				on_keydown(int keycode, t_p *param);
 int				on_resize(void);
 void			clean_up(t_map *map, t_list *data);
 
@@ -38,12 +37,13 @@ void			clean_up(t_map *map, t_list *data);
 void			init_hooks(t_p *p);
 int				on_mouse_move(int x, int y, t_p *param);
 int				on_close_window(t_p *param);
+int				on_keydown(int keycode, t_p *param);
 
 //create_graphics
-void			let_it_snow(t_p *param);
+void			gen_noise(t_p *param);
 void			draw_noisy_square(t_p param);
-void			draw_line(t_data *data, t_vector *vector);
-void			pixel_put(t_data *data, int x, int y, int color);
+void			draw_line(t_img *img, t_point a, t_point b);
+void			pixel_put(t_img *data, int x, int y, int color);
 void			draw_mouse_vector(t_p *p);
 
 //draw_map.c

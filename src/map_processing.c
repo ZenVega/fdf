@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+#include <limits.h>
 
 void	remove_nl(char *line)
 {
@@ -80,11 +81,15 @@ t_map	*create_map_matrix(t_list *data, t_map *map)
 	int		i;
 	int		j;
 	char	**vals;
+	int		lowest;
+	int		highest;
 
+	highest = INT_MIN;
+	lowest = INT_MAX;
 	j = 0;
 	while (data)
 	{
-		map->matrix[j] = (t_point *)malloc(sizeof(t_point) * map->length);
+		map->matrix[j] = (t_point *)malloc(sizeof(t_point) * map->width);
 		if (!map->matrix[j])
 			return (clean_up(map, data), NULL);
 		i = 0;
@@ -94,6 +99,10 @@ t_map	*create_map_matrix(t_list *data, t_map *map)
 			map->matrix[j][i].x = i;
 			map->matrix[j][i].y = j;
 			map->matrix[j][i].z = ft_atoi(vals[i]);
+			if (map->matrix[j][i].z > highest)
+				highest = map->matrix[j][i].z;
+			if (map->matrix[j][i].z < lowest)
+				lowest = map->matrix[j][i].z;
 			free(vals[i++]);
 		}
 		free(vals);
@@ -115,8 +124,8 @@ t_map	*init_map(t_list *data, int height)
 	map->matrix = (t_point **)malloc(sizeof(t_point *) * height);
 	if (!map->matrix)
 		return (clean_up(map, data), NULL);
-	map->length = get_map_width(data->content);
-	map->height = height;
+	map->width = get_map_width(data->content);
+	map->depth = height;
 	map = create_map_matrix(data, map);
 	clean_up(NULL, tmp);
 	return (map);

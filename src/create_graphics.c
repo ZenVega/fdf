@@ -12,17 +12,17 @@
 
 #include "../includes/fdf.h"
 
-void	pixel_put(t_data *data, int x, int y, int color)
+void	pixel_put(t_img *img, int x, int y, int color)
 {
 	int		offset;
 	char	*dst;
 
-	offset = y * data->line_length + x * (data->bits_per_pixel / 8);
-	dst = data->addr + offset;
-	* (unsigned int *)dst = color;
+	offset = y * img->line_length + x * (img->bits_per_pixel / 8);
+	dst = img->addr + offset;
+	*(unsigned int *)dst = color;
 }
 
-void	draw_line(t_data *data, t_vector *vector)
+void	draw_line(t_img *img, t_point a, t_point b)
 {
 	double	delta_x;
 	double	delta_y;
@@ -30,23 +30,23 @@ void	draw_line(t_data *data, t_vector *vector)
 	double	pixel_x;
 	double	pixel_y;
 
-	delta_x = vector->bx - vector->ax;
-	delta_y = vector->by - vector->ay;
+	delta_x = b.proj_x - a.proj_x;
+	delta_y = b.proj_y - a.proj_y;
 	pixels = sqrt((delta_x * delta_x) + (delta_y * delta_y));
 	delta_x /= pixels;
 	delta_y /= pixels;
-	pixel_x = vector->ax;
-	pixel_y = vector->ay;
+	pixel_x = a.proj_x;
+	pixel_y = a.proj_y;
 	while (pixels)
 	{
-		pixel_put(data, pixel_x, pixel_y, 0xFFFFFFFF);
+		pixel_put(img, pixel_x, pixel_y, 0xFFFFFFFF);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
 		--pixels;
 	}
 }
 
-void	let_it_snow(t_p *p)
+void	gen_noise(t_p *p)
 {
 	int	i;
 	int	x;
@@ -90,13 +90,13 @@ void	draw_noisy_square(t_p p)
 		}
 	}
 }
-void	draw_mouse_vector(t_p *p)
-{
-	t_vector	vector;
-
-	vector.ax = p->width / 2;
-	vector.ay = p->height / 2;
-	vector.bx = p->mouse_x;
-	vector.by = p->mouse_y;
-	draw_line(&p->img, &vector);
-}
+//void	draw_mouse_vector(t_p *p)
+//{
+//	t_vector	vector;
+//
+//	vector.ax = p->width / 2;
+//	vector.ay = p->height / 2;
+//	vector.bx = p->mouse_x;
+//	vector.by = p->mouse_y;
+//	//draw_line(&p->img, &vector);
+//}

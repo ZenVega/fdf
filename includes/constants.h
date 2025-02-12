@@ -12,14 +12,15 @@
 
 #define WIN_WIDTH 1920
 #define WIN_HEIGHT 1080
+#define PADDING 10 //in %
 
-typedef struct s_data {
+typedef struct s_img {
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}	t_data;
+}	t_img;
 
 typedef struct s_cursor {
 	void	*img;
@@ -45,13 +46,15 @@ typedef struct s_point {
 	int		z;
 	float	proj_x;
 	float	proj_y;
+	int		color;
 }	t_point;
 
 typedef struct s_map {
-	int		length;
-	int		height;
+	int		width;
+	int		depth;
 	int		highest_z;
 	int		lowest_z;
+	t_point	center;
 	t_point	**matrix;
 }	t_map;
 
@@ -59,10 +62,11 @@ typedef struct s_p {
 	void		*mlx;
 	void		*win;
 	t_map		*map;
-	t_data		img;
+	t_img		img;
 	t_cursor	cursor;
 	int			width;
 	int			height;
 	int			mouse_x;
 	int			mouse_y;
+	int			noise;
 }	t_p;

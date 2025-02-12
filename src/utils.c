@@ -52,14 +52,6 @@ int	create_argb(int a, int r, int g, int b)
 	return (a << 24 | r << 16 | g << 8 | b);
 }
 
-int	on_keydown(int keycode, t_p *p)
-{
-	ft_printf("KeY; %d\n", keycode);
-	if (keycode == 65307)
-		on_close_window(p);
-	return (0);
-}
-
 void	clean_up(t_map *map, t_list *data)
 {
 	int	i;
@@ -70,11 +62,10 @@ void	clean_up(t_map *map, t_list *data)
 	if (map && map->matrix)
 	{
 		i = 0;
-		while (i < map->height && map->matrix[i])
+		while (i < map->depth && map->matrix[i])
 			free(map->matrix[i++]);
 		(free(map->matrix), map->matrix = NULL);
 	}
 	if (map)
 		(free(map), map = NULL);
 }
-
