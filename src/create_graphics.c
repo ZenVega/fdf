@@ -17,16 +17,12 @@ void	pixel_put(t_img *img, int x, int y, unsigned int color)
 	int		offset;
 	char	*dst;
 
-	offset = y * img->line_length + x * (img->bits_per_pixel / 8);
-	dst = img->addr + offset;
-	*(unsigned int *)dst = color;
-}
-
-double absd(double a)
-{
-	if (a > 0.0)
-		return (a);
-	return (-a);
+	if (x > 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
+	{
+		offset = y * img->line_length + x * (img->bits_per_pixel / 8);
+		dst = img->addr + offset;
+		*(unsigned int *)dst = color;
+	}
 }
 
 void	draw_line(t_p *p, t_point a, t_point b)
@@ -42,7 +38,6 @@ void	draw_line(t_p *p, t_point a, t_point b)
 		pixels = v.delta_x;
 	else
 		pixels = v.delta_y;
-	//TODO: rename delta
 	v.delta_x /= pixels;
 	v.delta_y /= pixels;
 	v.delta_z = ((b.z - a.z) / (double)pixels);
