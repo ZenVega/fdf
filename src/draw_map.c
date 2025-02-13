@@ -21,6 +21,10 @@ float	map_val(float val, float input_range, int low_out, int high_out)
 	return (result);
 }
 
+void	rotate(t_p *p, int dir)
+{
+}
+
 void	draw_top_down(t_p *p)
 {
 	t_point	**matrix;
@@ -95,7 +99,8 @@ void	map_to_img(t_p *p)
 				draw_line(p, matrix[y][x], matrix[y][x + 1]);
 			if (!(y == p->map->depth - 1))
 				draw_line(p, matrix[y][x], matrix[y + 1][x]);
-			pixel_put(&p->img, matrix[y][x].proj_x, matrix[y][x].proj_y, matrix[y][x].color);
+			pixel_put(&p->img, matrix[y][x].proj_x,
+				matrix[y][x].proj_y, matrix[y][x].color);
 			y++;
 		}
 		x++;

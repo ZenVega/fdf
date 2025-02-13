@@ -41,7 +41,9 @@ int	on_keydown(int keycode, t_p *p)
 	if (keycode == 110)
 		p->noise = -p->noise;
 	if (keycode == 112)
-		if (++p->projection > 2)
-			p->projection = 1;
+	{
+		if (++p->projection > PROJ_MAX)
+			p->projection = 0;
+	}
 	return (0);
 }

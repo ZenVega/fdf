@@ -13,12 +13,14 @@
 //Canvas and dimentions
 #define WIN_WIDTH 1920
 #define WIN_HEIGHT 1080
-#define PADDING 0.1		//in %
+#define PADDING 0.1			//in %
 
 //Colors
-#define C_ZERO 0xFFFFFFFF
-#define C_HIGH 0xFF39FF14
-#define C_LOW 0xFFFF14AF
+#define C_ZERO 0xFFFFFFFF	//WHITE
+#define C_HIGH 0xFF39FF14	//NEON_GREEN
+#define C_LOW 0xFFFF14AF	//PINK
+
+#define PROJ_MAX 2			//number of projections
 
 typedef struct s_img {
 	void	*img;
@@ -87,4 +89,5 @@ typedef struct s_p {
 	int			mouse_y;
 	int			noise;
 	int			projection;
+	int			update;
 }	t_p;
