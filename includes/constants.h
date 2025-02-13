@@ -13,7 +13,7 @@
 //Canvas and dimentions
 #define WIN_WIDTH 1920
 #define WIN_HEIGHT 1080
-#define PADDING 10 //in %
+#define PADDING 0.1		//in %
 
 //Colors
 #define C_ZERO 0xFFFFFFFF
@@ -27,6 +27,16 @@ typedef struct s_img {
 	int		line_length;
 	int		endian;
 }	t_img;
+
+typedef struct s_proj {
+	double	x_step;
+	double	y_step;
+	double	x_start;
+	double	y_start;
+	double	width;
+	double	height;
+	double	ratio;
+}	t_proj;
 
 typedef struct s_cursor {
 	void	*img;
@@ -76,4 +86,5 @@ typedef struct s_p {
 	int			mouse_x;
 	int			mouse_y;
 	int			noise;
+	int			projection;
 }	t_p;

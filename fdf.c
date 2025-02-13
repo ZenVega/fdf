@@ -69,25 +69,15 @@ int	main(int argc, char **argv)
 	t_p			p;
 	t_list		*data;
 	t_map		*map;
-	int			i;
-	int			j;
+	int			map_height;
 
 	data = NULL;
 	if (argc != 2)
 		return (ft_printf("No Map"), 0);
-	j = load_data(&data, argv);
-	if (!j)
+	map_height = load_data(&data, argv);
+	if (!map_height)
 		return (ft_printf("No Map"), 0);
-	map = init_map(data, j);
-	j = 0;
-	while (j < map->depth)
-	{
-		i = 0;
-		while (i < map->width)
-			ft_printf("%d | ", map->matrix[j][i++].z);
-		ft_printf("\n");
-		j++;
-	}
+	map = init_map(data, map_height);
 	p = init_img();
 	p.map = map;
 	init_input_hooks(&p);

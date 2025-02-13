@@ -29,8 +29,8 @@ void	draw_top_down(t_p *p)
 	double	x_start;
 	double	y_start;
 
-	x_start = ((double)WIN_WIDTH / PADDING);
-	y_start = ((double)WIN_HEIGHT / PADDING);
+	x_start = ((double)WIN_WIDTH * PADDING);
+	y_start = ((double)WIN_HEIGHT * PADDING);
 	x = 0;
 	matrix = p->map->matrix;
 	while (x < p->map->width)
@@ -53,15 +53,15 @@ void	draw_iso(t_p *p)
 	t_point	**matrix;
 	int		x;
 	int		y;
-	double	x_step;
-	double	y_step;
-	double	x_start;
-	double	y_start;
-//TOTO: Scale factor for z_offset
-	x_start = (float)WIN_WIDTH / 2;
-	y_start = (float)WIN_HEIGHT / PADDING;
-	x_step = (WIN_WIDTH - 2 * (double)WIN_WIDTH / PADDING) / p->map->width;
-	y_step = (WIN_HEIGHT - 2 * (double)WIN_HEIGHT / PADDING) / p->map->depth;
+	t_proj	proj;
+
+	proj.x_step = (WIN_WIDTH * (1 - 2 * PADDING)) / p->map->width;
+	proj.y_step = (WIN_HEIGHT * (1 - 2 * PADDING)) / p->map->depth;
+	proj.width = (p->map->width + p->map->depth) * (proj.x_step / 2);
+	proj.height = (p->map->width + p->map->depth) * (proj.y_step / 2);
+	proj.ratio = ((float)p->map->width + p->map->depth) / p->map->depth ;
+	proj.x_start = (WIN_WIDTH - proj.width) / 2 + (proj.width / proj.ratio);
+	proj.y_start = (WIN_HEIGHT - proj.height) / 2;
 	x = 0;
 	matrix = p->map->matrix;
 	while (x < p->map->width)
@@ -69,20 +69,13 @@ void	draw_iso(t_p *p)
 		y = 0;
 		while (y < p->map->depth)
 		{
-			matrix[y][x].proj_x = x_start + (x - y) * (x_step / 2);
-			matrix[y][x].proj_y = y_start + (x + y) * (y_step / 2) - (matrix[y][x].z * y_step);
+			matrix[y][x].proj_x = proj.x_start + (x - y) * (proj.x_step / 2);
+			matrix[y][x].proj_y = proj.y_start + (x + y) * (proj.y_step / 2)
+				- (matrix[y][x].z * proj.y_step) / 6;
 			y++;
 		}
 		x++;
 	}
-}
-
-void	create_projection(int id, t_p *p)
-{
-	if (id == 1)
-		draw_top_down(p);
-	else if (id == 2)
-		draw_iso(p);
 }
 
 void	map_to_img(t_p *p)
@@ -111,6 +104,9 @@ void	map_to_img(t_p *p)
 
 void	draw_map(t_p *p)
 {
-	create_projection(2, p);
+	if (p->projection == 1)
+		draw_top_down(p);
+	else if (p->projection == 2)
+		draw_iso(p);
 	map_to_img(p);
 }

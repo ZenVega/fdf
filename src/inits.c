@@ -18,6 +18,7 @@ t_p	init_img(void)
 
 	p.mlx = mlx_init();
 	p.noise = -1;
+	p.projection = 2;
 	p.width = WIN_WIDTH;
 	p.height = WIN_HEIGHT;
 	p.win = mlx_new_window(p.mlx, p.width, p.height, "Wrecktal!");
