@@ -90,4 +90,5 @@ typedef struct s_p {
 	int			noise;
 	int			projection;
 	int			update;
+	float		zoom;
 }	t_p;

@@ -33,6 +33,14 @@ int	on_close_window(t_p *p)
 	return (0);
 }
 
+void	zoom(t_p *p, int keycode)
+{
+	if (keycode == 105)
+		p->zoom -= .2;
+	if (keycode == 111)
+		p->zoom += .2;
+}
+
 int	on_keydown(int keycode, t_p *p)
 {
 	ft_printf("KeY; %d\n", keycode);
@@ -45,5 +53,8 @@ int	on_keydown(int keycode, t_p *p)
 		if (++p->projection > PROJ_MAX)
 			p->projection = 0;
 	}
+	if (keycode == 105 || keycode == 111)
+		zoom(p, keycode);
 	return (0);
 }
+

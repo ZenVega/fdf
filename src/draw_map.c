@@ -21,20 +21,23 @@ float	map_val(float val, float input_range, int low_out, int high_out)
 	return (result);
 }
 
-void	rotate(t_p *p, int dir)
-{
-}
+//void	rotate(t_p *p, int dir)
+//{
+//}
 
 void	draw_top_down(t_p *p)
 {
 	t_point	**matrix;
 	int		x;
 	int		y;
-	double	x_start;
-	double	y_start;
+	t_proj	proj;
 
-	x_start = ((double)WIN_WIDTH * PADDING);
-	y_start = ((double)WIN_HEIGHT * PADDING);
+	proj.x_step = (WIN_WIDTH * (1 - 2 * PADDING)) / p->map->width / p->zoom;
+	proj.y_step = (WIN_HEIGHT * (1 - 2 * PADDING)) / p->map->depth / p->zoom;
+	proj.width = p->map->width * proj.x_step / p->zoom;
+	proj.height = p->map->depth * proj.y_step / p->zoom;
+	proj.x_start = (WIN_WIDTH - proj.width) / 2;
+	proj.y_start = (WIN_HEIGHT - proj.height) / 2;
 	x = 0;
 	matrix = p->map->matrix;
 	while (x < p->map->width)
@@ -43,9 +46,9 @@ void	draw_top_down(t_p *p)
 		while (y < p->map->depth)
 		{
 			matrix[y][x].proj_x = map_val((float)(x + 0.5), p->map->width,
-					x_start, (WIN_WIDTH - x_start));
+					proj.x_start, (WIN_WIDTH - proj.x_start));
 			matrix[y][x].proj_y = map_val((float)(y + 0.5), p->map->depth,
-					y_start, (WIN_HEIGHT - y_start));
+					proj.y_start, (WIN_HEIGHT - proj.y_start));
 			y++;
 		}
 		x++;
@@ -59,8 +62,8 @@ void	draw_iso(t_p *p)
 	int		y;
 	t_proj	proj;
 
-	proj.x_step = (WIN_WIDTH * (1 - 2 * PADDING)) / p->map->width;
-	proj.y_step = (WIN_HEIGHT * (1 - 2 * PADDING)) / p->map->depth;
+	proj.x_step = (WIN_WIDTH * (1 - 2 * PADDING)) / p->map->width / p->zoom;
+	proj.y_step = (WIN_HEIGHT * (1 - 2 * PADDING)) / p->map->depth / p->zoom;
 	proj.width = (p->map->width + p->map->depth) * (proj.x_step / 2);
 	proj.height = (p->map->width + p->map->depth) * (proj.y_step / 2);
 	proj.ratio = ((float)p->map->width + p->map->depth) / p->map->depth ;
