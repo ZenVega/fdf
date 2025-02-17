@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:20:32 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/12 18:53:56 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:07:24 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,3 @@ void	draw_noisy_square(t_p p)
 		}
 	}
 }
-//void	draw_mouse_vector(t_p *p)
-//{
-//	t_vector	vector;
-//
-//	vector.ax = p->width / 2;
-//	vector.ay = p->height / 2;
-//	vector.bx = p->mouse_x;
-//	vector.by = p->mouse_y;
-//	//draw_line(&p->img, &vector);
-//}

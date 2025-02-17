@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/12 17:31:04 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:20:41 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FDF_H
@@ -56,6 +56,14 @@ void			draw_noisy_square(t_p param);
 void			draw_line(t_p *p, t_point a, t_point b);
 void			pixel_put(t_img *data, int x, int y, unsigned int color);
 void			draw_mouse_vector(t_p *p);
+
+//rotations.c
+void			get_angles(t_ang *angles,
+					double ang_x, double ang_y, double ang_z);
+void			rotate(t_p *p, int keycode);
+void			calc_point(int x, int y, t_proj proj, t_p *p);
+void			rotate_point(t_point *point, t_p *p);
+void			project_point(t_point *point, t_proj proj);
 
 //draw_map.c
 void			draw_map(t_p *p);

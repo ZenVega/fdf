@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:10:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/12 17:28:12 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:44:58 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,9 @@ typedef struct s_point {
 	int				x;
 	int				y;
 	int				z;
+	double			rot_x;
+	double			rot_y;
+	double			rot_z;
 	float			proj_x;
 	float			proj_y;
 	unsigned int	color;
@@ -77,18 +80,29 @@ typedef struct s_map {
 	t_point	**matrix;
 }	t_map;
 
+typedef struct s_ang {
+	double	ang_x;
+	double	ang_y;
+	double	ang_z;
+	double	sin_x;
+	double	cos_x;
+	double	sin_y;
+	double	cos_y;
+	double	sin_z;
+	double	cos_z;
+}	t_ang;
+
 typedef struct s_p {
 	void		*mlx;
 	void		*win;
 	t_map		*map;
 	t_img		img;
-	t_cursor	cursor;
 	int			width;
 	int			height;
 	int			mouse_x;
 	int			mouse_y;
 	int			noise;
 	int			projection;
-	int			update;
 	float		zoom;
+	t_ang		angles;
 }	t_p;

@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:19:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/12 18:55:30 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:27:23 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,39 +38,39 @@ void	color_matrix(t_map *map)
 	}
 }
 
-static void	create_point(t_map *map, int x, int y, char **vals)
+static void	create_point(t_map *map, int i, int j, char **vals)
 {
 	t_point	*dest;
 
-	dest = &map->matrix[y][x];
-	dest->x = x;
-	dest->y = y;
-	dest->z = ft_atoi(vals[x]);
+	dest = &map->matrix[i][j];
+	dest->x = j - map->width / 2;
+	dest->y = i - map->depth / 2;
+	dest->z = ft_atoi(vals[j]);
 	if (dest->z > map->highest_z)
 		map->highest_z = dest->z;
 	if (dest->z < map->lowest_z)
 		map->lowest_z = dest->z;
-	free(vals[x]);
+	free(vals[j]);
 }
 
 t_map	*create_map_matrix(t_list *data, t_map *map)
 {
-	int		x;
-	int		y;
+	int		j;
+	int		i;
 	char	**vals;
 
-	y = 0;
+	i = 0;
 	while (data)
 	{
-		map->matrix[y] = (t_point *)malloc(sizeof(t_point) * map->width);
-		if (!map->matrix[y])
+		map->matrix[i] = (t_point *)malloc(sizeof(t_point) * map->width);
+		if (!map->matrix[i])
 			return (clean_up(map, data), NULL);
-		x = -1;
+		j = -1;
 		vals = ft_split(data->content, ' ');
-		while (vals[++x])
-			create_point(map, x, y, vals);
+		while (vals[++j])
+			create_point(map, i, j, vals);
 		free(vals);
-		y++;
+		i++;
 		data = data->next;
 	}
 	return (map);

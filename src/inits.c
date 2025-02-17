@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:22:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/12 17:07:11 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/17 12:17:30 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_p	init_img(void)
 	p.mlx = mlx_init();
 	p.noise = -1;
 	p.projection = 2;
-	p.update = 1;
 	p.zoom = 1;
 	p.width = WIN_WIDTH;
 	p.height = WIN_HEIGHT;
@@ -27,6 +26,7 @@ t_p	init_img(void)
 	p.img.img = mlx_new_image(p.mlx, p.width, p.height);
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bits_per_pixel,
 			&p.img.line_length, &p.img.endian);
+	get_angles(&p.angles, 90, 0, 0);
 	return (p);
 }
 

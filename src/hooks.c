@@ -1,23 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mouse_move.c                                       :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:53:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 15:28:52 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/17 15:52:42 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-void	init_hooks(t_p *p)
-{
-	mlx_key_hook(p->win, on_keydown, p);
-	mlx_hook(p->win, 6, 1L << 6, on_mouse_move, p);
-	mlx_hook(p->win, 17, (1L << 17), on_close_window, p);
-}
 
 int	on_mouse_move(int x, int y, t_p *p)
 {
@@ -55,6 +48,7 @@ int	on_keydown(int keycode, t_p *p)
 	}
 	if (keycode == 105 || keycode == 111)
 		zoom(p, keycode);
+	if (keycode == 116 || keycode == 121 || keycode == 103 || keycode == 104)
+		rotate(p, keycode);
 	return (0);
 }
-
