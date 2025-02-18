@@ -64,7 +64,7 @@ void	rotate_point(t_point *point, t_p *p)
 
 	tmp_x = point->x * p->angles.cos_z - point->y * p->angles.sin_z;
 	tmp_y = point->x * p->angles.sin_z + point->y * p->angles.cos_z;
-	tmp_z = point->z;
+	tmp_z = (float)point->z * p->scale_factor;
 	point->rot_x = tmp_x * p->angles.cos_y + tmp_z * p->angles.sin_y;
 	point->rot_z = -tmp_x * p->angles.sin_y + tmp_z * p->angles.cos_y;
 	point->rot_y = tmp_y;

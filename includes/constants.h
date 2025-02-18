@@ -41,6 +41,7 @@
 #define KEY_R 114
 #define KEY_I 111
 #define KEY_O 105
+#define KEY_S 115
 #define KEY_X 120
 #define KEY_ESC 65307
 #define KEY_SHIFT 65505
@@ -135,6 +136,7 @@ typedef struct s_p {
 	int			z_rot;
 	int			rot_timer;
 	int			rot_speed;
+	double		scale_factor;
 	double		center_x;
 	double		center_y;
 }	t_p;

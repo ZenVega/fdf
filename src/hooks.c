@@ -65,6 +65,13 @@ int	on_key_down(int keycode, t_p *p)
 		p->noise = -p->noise;
 	if (keycode == KEY_P)
 		change_projection(p);
+	if (keycode == KEY_S)
+	{
+		if (p->shifted)
+			p->scale_factor = p->scale_factor * 1.1;
+		else
+			p->scale_factor = p->scale_factor * 0.9;
+	}
 	if (keycode == KEY_I || keycode == KEY_O)
 		zoom(p, keycode);
 	if (keycode == KEY_SB_OPEN || keycode == KEY_SB_CLOSE

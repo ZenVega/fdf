@@ -21,6 +21,7 @@ void	reset_params(t_p *p)
 	p->rot_timer = ROT_TIMER;
 	p->rot_speed = ROT_TIMER;
 	p->projection = 0;
+	p->scale_factor = 1.0;
 	p->zoom = 1;
 	p->center_x = (double)WIN_WIDTH / 2;
 	p->center_y = (double)WIN_HEIGHT / 2;
@@ -71,5 +72,4 @@ void	init_input_hooks(t_p *p)
 	mlx_hook(p->win, 2, (1L << 0), on_key_down, p);
 	mlx_hook(p->win, 3, (1L << 1), on_key_release, p);
 	mlx_hook(p->win, 17, (1L << 17), on_close_window, p);
-	//mlx_key_hook(p->win, on_key_down, p);
 }

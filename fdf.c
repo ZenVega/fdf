@@ -68,6 +68,7 @@ int	render_frames(t_p *p)
 	draw_map(p);
 	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
 	mlx_string_put(p->mlx, p->win, p->mouse_x, p->mouse_y, col, "<-ok_shit");
+	printf("SCALE: %lf\n", p->scale_factor);
 	return (0);
 }
 
