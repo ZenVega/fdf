@@ -25,6 +25,9 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+//fdf.c
+int				render_frames(t_p *p);
+
 //map_processing.c
 t_map			*create_map_matrix(t_list *data, t_map *map);
 int				get_map_width(char *line);
@@ -37,6 +40,7 @@ int				load_data(t_list **data, char **argv);
 t_p				init_img(void);
 t_map			*init_map(t_list *data, int height);
 void			init_input_hooks(t_p *p);
+void			reset_params(t_p *p);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);

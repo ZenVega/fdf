@@ -68,5 +68,4 @@ void	get_angles(t_ang *angles, double ang_x, double ang_y, double ang_z)
 	angles->cos_y = cos(ang_y);
 	angles->sin_z = sin(ang_z);
 	angles->cos_z = cos(ang_z);
-	printf("X: %f, Y: %f, Z: %f\n", angles->ang_x, angles->ang_y, angles->ang_z); 
 }

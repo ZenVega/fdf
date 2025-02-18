@@ -12,16 +12,24 @@
 
 #include "../includes/fdf.h"
 
+void	reset_params(t_p *p)
+{
+	p->noise = -1;
+	p->rotating = -1;
+	p->rot_timer = ROT_TIMER;
+	p->projection = 0;
+	p->zoom = 1;
+	p->center_x = (double)WIN_WIDTH / 2;
+	p->center_y = (double)WIN_HEIGHT / 2;
+	get_angles(&p->angles, INIT_X_ANG, INIT_Y_ANG, INIT_Z_ANG);
+}
+
 t_p	init_img(void)
 {
 	static t_p	p;
 
 	p.mlx = mlx_init();
-	p.noise = -1;
-	p.rotating = -1;
-	p.rot_timer = ROT_TIMER;
-	p.projection = 2;
-	p.zoom = 1;
+	reset_params(&p);
 	p.width = WIN_WIDTH;
 	p.height = WIN_HEIGHT;
 	p.win = mlx_new_window(p.mlx, p.width, p.height, "Wrecktal!");

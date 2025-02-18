@@ -21,7 +21,7 @@
 #define C_LOW 0xFFFF14AF	//PINK
 
 //CONFIGS
-#define PROJ_MAX 2			//number of projections
+#define PROJ_MAX 1			//number of projections
 #define ROT_TIMER 2
 #define INIT_X_ANG 90.314159
 #define INIT_Y_ANG -0.628319
@@ -39,6 +39,7 @@
 #define KEY_R 114
 #define KEY_I 111
 #define KEY_O 105
+#define KEY_X 120
 #define KEY_ESC 65307
 
 typedef struct s_img {
@@ -126,4 +127,6 @@ typedef struct s_p {
 	t_ang		angles;
 	int			rotating;
 	int			rot_timer;
+	double		center_x;
+	double		center_y;
 }	t_p;
