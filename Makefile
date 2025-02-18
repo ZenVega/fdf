@@ -8,6 +8,7 @@ CFILES		= \
 			$(SRC_FOLDER)inits.c\
 			$(SRC_FOLDER)input_processing.c\
 			$(SRC_FOLDER)map_processing.c\
+			$(SRC_FOLDER)menue.c\
 			$(SRC_FOLDER)utils.c\
 			$(SRC_FOLDER)rotations.c\
 			gnl/get_next_line.c\
