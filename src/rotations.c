@@ -29,12 +29,21 @@ void	rotate(t_p *p, int keycode)
 
 void	rotate_point(t_point *point, t_p *p)
 {
-	point->rot_x = point->x * p->angles.cos_z - point->y * p->angles.sin_z;
-	point->rot_y = point->x * p->angles.sin_z + point->y * p->angles.cos_z;
-	point->rot_x = point->x * p->angles.cos_y - point->z * p->angles.sin_y;
-	point->rot_z = point->x * p->angles.sin_y + point->z * p->angles.cos_y;
-	point->rot_y = point->y * p->angles.cos_x - point->z * p->angles.sin_x;
-	point->rot_z = point->y * p->angles.sin_x + point->z * p->angles.cos_x;
+	double tmp_x;
+	double tmp_y;
+	double tmp_z;
+
+	tmp_x = point->x * p->angles.cos_z - point->y * p->angles.sin_z;
+	tmp_y = point->x * p->angles.sin_z + point->y * p->angles.cos_z;
+	tmp_z = point->z;
+	point->rot_x = tmp_x * p->angles.cos_y + tmp_z * p->angles.sin_y;
+	point->rot_z = -tmp_x * p->angles.sin_y + tmp_z * p->angles.cos_y;
+	point->rot_y = tmp_y;
+
+	tmp_y = point->rot_y * p->angles.cos_x - point->rot_z * p->angles.sin_x;
+	tmp_z = point->rot_y * p->angles.sin_x + point->rot_z * p->angles.cos_x;
+
+	point->rot_y = tmp_y;
 }
 
 void	project_point(t_point *point, t_proj proj)
