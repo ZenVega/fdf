@@ -12,10 +12,34 @@
 
 #include "../includes/fdf.h"
 
+void	permanent_rotation(t_p *p, int keycode)
+{
+	if (keycode == KEY_SB_OPEN)
+		p->x_rot = -1;
+	if (keycode == KEY_SB_CLOSE)
+		p->x_rot = 1;
+	if (keycode == KEY_SEMIC)
+		p->y_rot = -1;
+	if (keycode == KEY_COMMA)
+		p->y_rot = 1;
+	if (keycode == KEY_DOT)
+		p->z_rot = -1;
+	if (keycode == KEY_SLASH)
+		p->z_rot = 1;
+	if (keycode == KEY_BACKSPACE)
+	{
+		p->x_rot = 0;
+		p->y_rot = 0;
+		p->z_rot = 0;
+	}
+}
+
 void	rotate(t_p *p, int keycode)
 {
 	t_ang	*ang;
 
+	if (p->shifted)
+		permanent_rotation(p, keycode);
 	ang = &p->angles;
 	p->rot_timer = ROT_TIMER;
 	if (keycode == KEY_SB_OPEN)

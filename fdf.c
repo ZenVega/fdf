@@ -32,6 +32,25 @@ void	reset_img(t_img img, int width, int height)
 	}
 }
 
+void	rot_sequence(t_p *p)
+{
+	if (--p->rot_timer > 0)
+		return ;
+	if (p->x_rot == -1)
+		rotate(p, KEY_SB_OPEN);
+	else if (p->x_rot == 1)
+		rotate(p, KEY_SB_CLOSE);
+	if (p->y_rot == -1)
+		rotate(p, KEY_SEMIC);
+	else if (p->y_rot == 1)
+		rotate(p, KEY_COMMA);
+	if (p->z_rot == -1)
+		rotate(p, KEY_DOT);
+	else if (p->z_rot == 1)
+		rotate(p, KEY_SLASH);
+	p->rot_timer = p->rot_speed;
+}
+
 int	render_frames(t_p *p)
 {
 	t_img		img;
@@ -44,9 +63,8 @@ int	render_frames(t_p *p)
 	reset_img(img, p->width, p->height);
 	if (p->noise == 1)
 		gen_noise(p);
-	if (p->rotating == 1)
-		if (--p->rot_timer < 0)
-			rotate(p, KEY_SB_OPEN);
+	if (p->x_rot != 0 || p->y_rot != 0 || p->z_rot != 0)
+		rot_sequence(p);
 	draw_map(p);
 	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
 	mlx_string_put(p->mlx, p->win, p->mouse_x, p->mouse_y, col, "<-ok_shit");

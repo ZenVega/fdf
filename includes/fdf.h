@@ -50,9 +50,10 @@ int				on_resize(void);
 void			clean_up(t_map *map, t_list *data);
 
 //hooks.c
-int				on_mouse_move(int x, int y, t_p *param);
 int				on_close_window(t_p *param);
-int				on_keydown(int keycode, t_p *param);
+int				on_key_down(int keycode, t_p *param);
+int				on_key_release(int keycode, t_p *param);
+int				on_mouse_click(int button, int x, int y, t_p *p);
 
 //create_graphics
 void			gen_noise(t_p *param);
@@ -68,6 +69,7 @@ void			rotate(t_p *p, int keycode);
 void			calc_point(int x, int y, t_proj proj, t_p *p);
 void			rotate_point(t_point *point, t_p *p);
 void			project_point(t_point *point, t_proj proj);
+void			permanent_rotation(t_p *p, int keycode);
 
 //draw_map.c
 void			draw_map(t_p *p);

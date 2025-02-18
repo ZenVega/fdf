@@ -34,6 +34,8 @@
 #define KEY_COMMA 39
 #define KEY_DOT 46
 #define KEY_SLASH 47
+#define KEY_MINUS 45
+#define KEY_EQUAL 61
 #define KEY_N 110
 #define KEY_P 112
 #define KEY_R 114
@@ -41,6 +43,8 @@
 #define KEY_O 105
 #define KEY_X 120
 #define KEY_ESC 65307
+#define KEY_SHIFT 65505
+#define KEY_BACKSPACE 65288
 
 typedef struct s_img {
 	void	*img;
@@ -123,10 +127,14 @@ typedef struct s_p {
 	int			mouse_y;
 	int			noise;
 	int			projection;
+	int			shifted;
 	float		zoom;
 	t_ang		angles;
-	int			rotating;
+	int			x_rot;
+	int			y_rot;
+	int			z_rot;
 	int			rot_timer;
+	int			rot_speed;
 	double		center_x;
 	double		center_y;
 }	t_p;

@@ -15,8 +15,11 @@
 void	reset_params(t_p *p)
 {
 	p->noise = -1;
-	p->rotating = -1;
+	p->x_rot = 0;
+	p->y_rot = 0;
+	p->z_rot = 0;
 	p->rot_timer = ROT_TIMER;
+	p->rot_speed = ROT_TIMER;
 	p->projection = 0;
 	p->zoom = 1;
 	p->center_x = (double)WIN_WIDTH / 2;
@@ -64,7 +67,9 @@ t_map	*init_map(t_list *data, int height)
 
 void	init_input_hooks(t_p *p)
 {
-	mlx_key_hook(p->win, on_keydown, p);
-	mlx_hook(p->win, 6, 1L << 6, on_mouse_move, p);
+	mlx_mouse_hook(p->win, on_mouse_click, p);
+	mlx_hook(p->win, 2, (1L << 0), on_key_down, p);
+	mlx_hook(p->win, 3, (1L << 1), on_key_release, p);
 	mlx_hook(p->win, 17, (1L << 17), on_close_window, p);
+	//mlx_key_hook(p->win, on_key_down, p);
 }
