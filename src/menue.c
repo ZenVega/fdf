@@ -6,16 +6,9 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 15:41:45 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 16:48:31 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:49:40 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#define LINE_HEIGHT 16
-#define TEXT_COL 0xFFFFFFFF
-#define MENUE_LEN 17
-#define M_Y_OFF 80
-#define M_X_OFF 30
-#define M_COL 120
-
 #include "../includes/fdf.h"
 
 char	**get_keys(void)

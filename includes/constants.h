@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:10:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/17 14:44:58 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/18 16:52:48 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@
 #define KEY_SHIFT 65505
 #define KEY_BACKSPACE 65288
 
+//MENUE
+#define LINE_HEIGHT 16
+#define TEXT_COL 0xFFFFFFFF
+#define MENUE_LEN 17		//items in menue
+#define M_Y_OFF 80		//Y-Offset
+#define M_X_OFF 30		//X-Offset
+#define M_COL 120		//Column Width
+
 typedef struct s_img {
 	void	*img;
 	char	*addr;
@@ -64,17 +72,6 @@ typedef struct s_proj {
 	double	height;
 	double	ratio;
 }	t_proj;
-
-typedef struct s_cursor {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-	char	*file;
-	int		width;
-	int		height;
-}	t_cursor;
 
 typedef struct s_vector {
 	double	delta_x;
