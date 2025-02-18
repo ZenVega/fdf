@@ -20,7 +20,26 @@
 #define C_HIGH 0xFF39FF14	//NEON_GREEN
 #define C_LOW 0xFFFF14AF	//PINK
 
+//CONFIGS
 #define PROJ_MAX 2			//number of projections
+#define ROT_TIMER 2
+#define INIT_X_ANG 90.314159
+#define INIT_Y_ANG -0.628319
+#define INIT_Z_ANG -1.884956
+
+//KEYS
+#define KEY_SB_OPEN 91
+#define KEY_SB_CLOSE 93
+#define KEY_SEMIC 59
+#define KEY_COMMA 39
+#define KEY_DOT 46
+#define KEY_SLASH 47
+#define KEY_N 110
+#define KEY_P 112
+#define KEY_R 114
+#define KEY_I 111
+#define KEY_O 105
+#define KEY_ESC 65307
 
 typedef struct s_img {
 	void	*img;
@@ -105,4 +124,6 @@ typedef struct s_p {
 	int			projection;
 	float		zoom;
 	t_ang		angles;
+	int			rotating;
+	int			rot_timer;
 }	t_p;

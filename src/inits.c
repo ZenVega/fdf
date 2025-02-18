@@ -18,6 +18,8 @@ t_p	init_img(void)
 
 	p.mlx = mlx_init();
 	p.noise = -1;
+	p.rotating = -1;
+	p.rot_timer = ROT_TIMER;
 	p.projection = 2;
 	p.zoom = 1;
 	p.width = WIN_WIDTH;
@@ -26,7 +28,7 @@ t_p	init_img(void)
 	p.img.img = mlx_new_image(p.mlx, p.width, p.height);
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bits_per_pixel,
 			&p.img.line_length, &p.img.endian);
-	get_angles(&p.angles, 90, 0, 0);
+	get_angles(&p.angles, INIT_X_ANG, INIT_Y_ANG, INIT_Z_ANG);
 	return (p);
 }
 

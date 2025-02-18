@@ -44,6 +44,9 @@ int	render_frames(t_p *p)
 	reset_img(img, p->width, p->height);
 	if (p->noise == 1)
 		gen_noise(p);
+	if (p->rotating == 1)
+		if (--p->rot_timer < 0)
+			rotate(p, KEY_SB_OPEN);
 	draw_map(p);
 	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
 	mlx_string_put(p->mlx, p->win, p->mouse_x, p->mouse_y, col, "<-ok_shit");
