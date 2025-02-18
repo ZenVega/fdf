@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:53:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/17 15:52:42 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:40:11 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	on_mouse_click(int button, int x, int y, t_p *p)
 	p->center_x = x + (p->center_x - x) * zoom_factor;
 	p->center_y = y + (p->center_y - y) * zoom_factor;
 	p->zoom = zoom_factor;
-	ft_printf("ZOOM: %f\n", zoom_factor);
 	return (0);
 }
 

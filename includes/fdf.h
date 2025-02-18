@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 15:58:35 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:36:19 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FDF_H
@@ -41,6 +41,7 @@ t_p				init_img(void);
 t_map			*init_map(t_list *data, int height);
 void			init_input_hooks(t_p *p);
 void			reset_params(t_p *p);
+void			init_menu(t_p *p);
 
 //utils.c
 unsigned int	shift_to_white(unsigned int color, int shift_val);
@@ -74,6 +75,8 @@ void			permanent_rotation(t_p *p, int keycode);
 //draw_map.c
 void			draw_map(t_p *p);
 
-//menue.c
-void			print_menue(t_p *p);
+//menu.c
+void			get_keys(t_menu *menu);
+void			get_vals(t_menu *menu);
+void			print_menu(t_p *p, t_menu *menu);
 #endif

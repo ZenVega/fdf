@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:10:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 16:52:48 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:38:00 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,15 @@
 //MENUE
 #define LINE_HEIGHT 16
 #define TEXT_COL 0xFFFFFFFF
-#define MENUE_LEN 17		//items in menue
+#define MENU_LEN 19		//items in menu
 #define M_Y_OFF 80		//Y-Offset
 #define M_X_OFF 30		//X-Offset
 #define M_COL 120		//Column Width
+
+typedef struct s_menu {
+	char	*keys[MENU_LEN];
+	char	*vals[MENU_LEN];
+}	t_menu;
 
 typedef struct s_img {
 	void	*img;
@@ -119,6 +124,7 @@ typedef struct s_p {
 	void		*win;
 	t_map		*map;
 	t_img		img;
+	t_menu		menu;
 	int			width;
 	int			height;
 	int			mouse_x;

@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 15:59:50 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:41:00 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "includes/fdf.h"
@@ -68,8 +68,7 @@ int	render_frames(t_p *p)
 	draw_map(p);
 	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
 	mlx_string_put(p->mlx, p->win, p->mouse_x, p->mouse_y, col, "<-ok_shit");
-	print_menue(p);
-	printf("SCALE: %lf\n", p->scale_factor);
+	print_menu(p, &p->menu);
 	return (0);
 }
 
@@ -86,6 +85,10 @@ void	close_program(t_p *p, t_map *map)
 	clean_up(map, NULL);
 }
 
+//TODOS:
+//fix glitch
+//fix zoom crash
+// make transition
 int	main(int argc, char **argv)
 {
 	t_p			p;
@@ -103,6 +106,7 @@ int	main(int argc, char **argv)
 	p = init_img();
 	p.map = map;
 	init_input_hooks(&p);
+	init_menu(&p);
 	mlx_loop_hook(p.mlx, render_frames, &p);
 	mlx_loop(p.mlx);
 	close_program(&p, map);

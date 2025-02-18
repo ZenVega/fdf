@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:22:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/17 12:17:30 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/18 17:36:41 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,10 @@ void	init_input_hooks(t_p *p)
 	mlx_hook(p->win, 2, (1L << 0), on_key_down, p);
 	mlx_hook(p->win, 3, (1L << 1), on_key_release, p);
 	mlx_hook(p->win, 17, (1L << 17), on_close_window, p);
+}
+
+void	init_menu(t_p *p)
+{
+	get_keys(&p->menu);
+	get_vals(&p->menu);
 }
