@@ -61,7 +61,7 @@ t_map	*init_map(t_list *data, int height)
 	map->highest_z = INT_MIN;
 	map->lowest_z = INT_MAX;
 	map = create_map_matrix(data, map);
-	color_matrix(map);
+	//color_matrix(map);
 	clean_up(NULL, tmp);
 	return (map);
 }

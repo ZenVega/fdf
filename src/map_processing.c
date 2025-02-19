@@ -37,20 +37,46 @@ void	color_matrix(t_map *map)
 		x++;
 	}
 }
+int	contains_comma(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		if (str[i] == ',')
+			return (i);
+	return (-1);
+}
 
 static void	create_point(t_map *map, int i, int j, char **vals)
 {
-	t_point	*dest;
+	t_point			*dest;
+	char			**splitted;
+	unsigned int	alt;
+	unsigned long	col;
 
+	col = C_ZERO;
+	splitted = NULL;
+	if (contains_comma(vals[j]) != -1)
+	{
+		splitted = ft_split(vals[j], ',');
+		alt = ft_atoi(splitted[0]);
+		col = (unsigned long)splitted[1] | (0xFF << 24);
+	}
+	else
+		alt = ft_atoi(vals[j]);
 	dest = &map->matrix[i][j];
 	dest->x = j - map->width / 2;
 	dest->y = i - map->depth / 2;
-	dest->z = ft_atoi(vals[j]);
+	dest->z = alt;
+	dest->color = col;
 	if (dest->z > map->highest_z)
 		map->highest_z = dest->z;
 	if (dest->z < map->lowest_z)
 		map->lowest_z = dest->z;
 	free(vals[j]);
+	if (splitted)
+		free(splitted);
 }
 
 t_map	*create_map_matrix(t_list *data, t_map *map)

@@ -86,9 +86,10 @@ void	close_program(t_p *p, t_map *map)
 }
 
 //TODOS:
-//fix glitch
-//fix zoom crash
+// fix zoom crash
 // make transition
+// deal with colors
+//perror,strerror
 int	main(int argc, char **argv)
 {
 	t_p			p;
