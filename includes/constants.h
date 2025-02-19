@@ -36,6 +36,7 @@
 #define KEY_SLASH 47
 #define KEY_MINUS 45
 #define KEY_EQUAL 61
+#define KEY_C 99
 #define KEY_N 110
 #define KEY_P 112
 #define KEY_R 114
@@ -50,7 +51,7 @@
 //MENUE
 #define LINE_HEIGHT 16
 #define TEXT_COL 0xFFFFFFFF
-#define MENU_LEN 19		//items in menu
+#define MENU_LEN 20		//items in menu
 #define M_Y_OFF 80		//Y-Offset
 #define M_X_OFF 30		//X-Offset
 #define M_COL 120		//Column Width
@@ -84,6 +85,7 @@ typedef struct s_vector {
 	double	delta_z;
 	double	pixel_x;
 	double	pixel_y;
+	int		pixels;
 }	t_vector;
 
 typedef struct s_point {
@@ -96,6 +98,7 @@ typedef struct s_point {
 	float			proj_x;
 	float			proj_y;
 	unsigned int	color;
+	unsigned int	color_height;
 }	t_point;
 
 typedef struct s_map {
@@ -130,6 +133,7 @@ typedef struct s_p {
 	int			mouse_x;
 	int			mouse_y;
 	int			noise;
+	int			syscol;
 	int			projection;
 	int			shifted;
 	float		zoom;

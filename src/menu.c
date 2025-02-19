@@ -28,10 +28,11 @@ void	get_keys(t_menu *menu)
 	menu->keys[12] = "";
 	menu->keys[13] = "toggle noise";
 	menu->keys[14] = "toggle projection";
-	menu->keys[15] = "";
-	menu->keys[16] = "reset";
-	menu->keys[17] = "";
-	menu->keys[18] = "exit";
+	menu->keys[15] = "toggle color";
+	menu->keys[16] = "";
+	menu->keys[17] = "reset";
+	menu->keys[18] = "";
+	menu->keys[19] = "exit";
 }
 
 void	get_vals(t_menu *menu)
@@ -51,10 +52,11 @@ void	get_vals(t_menu *menu)
 	menu->vals[12] = " ";
 	menu->vals[13] = "[N]";
 	menu->vals[14] = "[P]";
-	menu->vals[15] = " ";
-	menu->vals[16] = "[X]";
-	menu->vals[17] = " ";
-	menu->vals[18] = "[ESC]";
+	menu->vals[15] = "[C]";
+	menu->vals[16] = " ";
+	menu->vals[17] = "[X]";
+	menu->vals[18] = " ";
+	menu->vals[19] = "[ESC]";
 }
 
 void	print_menu(t_p *p, t_menu *menu)

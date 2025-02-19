@@ -73,6 +73,8 @@ int	on_key_down(int keycode, t_p *p)
 	}
 	if (keycode == KEY_I || keycode == KEY_O)
 		zoom(p, keycode);
+	if (keycode == KEY_C)
+		p->syscol = -p->syscol;
 	if (keycode == KEY_SB_OPEN || keycode == KEY_SB_CLOSE
 		|| keycode == KEY_SEMIC || keycode == KEY_COMMA
 		|| keycode == KEY_DOT || keycode == KEY_SLASH)

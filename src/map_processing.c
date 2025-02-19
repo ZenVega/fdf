@@ -27,10 +27,10 @@ void	color_matrix(t_map *map)
 		while (y < map->depth)
 		{
 			if (matrix[y][x].z >= 0)
-				matrix[y][x].color = get_grad_col(matrix[y][x].z,
+				matrix[y][x].color_height = get_grad_col(matrix[y][x].z,
 						map->highest_z, C_ZERO, C_HIGH);
 			else
-				matrix[y][x].color = get_grad_col(matrix[y][x].z,
+				matrix[y][x].color_height = get_grad_col(matrix[y][x].z,
 						map->lowest_z, C_ZERO, C_LOW);
 			y++;
 		}
@@ -61,6 +61,7 @@ static void	create_point(t_map *map, int i, int j, char **vals)
 	{
 		splitted = ft_split(vals[j], ',');
 		alt = ft_atoi(splitted[0]);
+		//base to ul
 		col = (unsigned long)splitted[1] | (0xFF << 24);
 	}
 	else

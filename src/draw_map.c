@@ -41,9 +41,10 @@ void	draw_proj(t_proj *proj, t_p *p)
 }
 void	map_to_img(t_p *p)
 {
-	int		j;
-	int		i;
-	t_point	**matrix;
+	int				j;
+	int				i;
+	t_point			**matrix;
+	unsigned long	col;
 
 	matrix = p->map->matrix;
 	j = 0;
@@ -52,12 +53,15 @@ void	map_to_img(t_p *p)
 		i = 0;
 		while (i < p->map->depth)
 		{
+			col = matrix[i][j].color_height;
+			if (p->syscol == 1)
+				col = matrix[i][j].color;
 			if (!(j == p->map->width - 1))
 				draw_line(p, matrix[i][j], matrix[i][j + 1]);
 			if (!(i == p->map->depth - 1))
 				draw_line(p, matrix[i][j], matrix[i + 1][j]);
 			pixel_put(&p->img, matrix[i][j].proj_x,
-				matrix[i][j].proj_y, matrix[i][j].color);
+				matrix[i][j].proj_y, col);
 			i++;
 		}
 		j++;

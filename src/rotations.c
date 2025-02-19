@@ -75,7 +75,6 @@ void	rotate_point(t_point *point, t_p *p)
 
 void	project_point(t_point *point, t_proj proj)
 {
-	//ft_printf("%d/%d\n", point->x, point->y);
 	point->proj_x = proj.x_start + (point->rot_x
 			- point->rot_y) * (proj.x_step / 2);
 	point->proj_y = proj.y_start + (point->rot_x

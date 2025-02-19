@@ -25,28 +25,43 @@ void	pixel_put(t_img *img, int x, int y, unsigned int color)
 	}
 }
 
-void	draw_line(t_p *p, t_point a, t_point b)
+t_vector	get_vector(t_point a, t_point b)
 {
 	t_vector		v;
-	int				pixels;
-	unsigned int	color;
-	int				i;
 
 	v.delta_x = b.proj_x - a.proj_x;
 	v.delta_y = b.proj_y - a.proj_y;
 	if (v.delta_x > v.delta_y)
-		pixels = v.delta_x;
+		v.pixels = v.delta_x;
 	else
-		pixels = v.delta_y;
-	v.delta_x /= pixels;
-	v.delta_y /= pixels;
-	v.delta_z = ((b.z - a.z) / (double)pixels);
+		v.pixels = v.delta_y;
+	v.delta_x /= v.pixels;
+	v.delta_y /= v.pixels;
+	v.delta_z = ((b.z - a.z) / (double)v.pixels);
 	v.pixel_x = a.proj_x;
 	v.pixel_y = a.proj_y;
+	return (v);
+}
+void	draw_line(t_p *p, t_point a, t_point b)
+{
+	t_vector		v;
+	unsigned int	color;
+	int				i;
+
+	if (
+		(a.proj_x < 0 && b.proj_x < 0)
+		|| (a.proj_x > p->width && b.proj_x > p->width)
+		|| (a.proj_y < 0 && b.proj_y < 0)
+		|| (a.proj_y > p->height && b.proj_y > p->height))
+		return ;
+	v = get_vector(a, b);
 	i = 0;
-	while (i < pixels)
+	while (i < v.pixels)
 	{
-		color = get_grad_col(i, pixels, a.color, b.color);
+		if (p->syscol == 1)
+			color = get_grad_col(i, v.pixels, a.color, b.color);
+		else
+			color = get_grad_col(i, v.pixels, a.color_height, b.color_height);
 		pixel_put(&p->img, (int)v.pixel_x, (int)v.pixel_y, color);
 		v.pixel_x += v.delta_x;
 		v.pixel_y += v.delta_y;

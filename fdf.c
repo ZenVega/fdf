@@ -88,8 +88,9 @@ void	close_program(t_p *p, t_map *map)
 //TODOS:
 // fix zoom crash
 // make transition
-// deal with colors
-//perror,strerror
+// perror,strerror
+// int_min, int_max ->draw line..
+// sys color wrong
 int	main(int argc, char **argv)
 {
 	t_p			p;

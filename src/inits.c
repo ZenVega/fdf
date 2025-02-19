@@ -36,6 +36,7 @@ t_p	init_img(void)
 	reset_params(&p);
 	p.width = WIN_WIDTH;
 	p.height = WIN_HEIGHT;
+	p.syscol = 1;
 	p.win = mlx_new_window(p.mlx, p.width, p.height, "Wrecktal!");
 	p.img.img = mlx_new_image(p.mlx, p.width, p.height);
 	p.img.addr = mlx_get_data_addr(p.img.img, &p.img.bits_per_pixel,
@@ -61,7 +62,7 @@ t_map	*init_map(t_list *data, int height)
 	map->highest_z = INT_MIN;
 	map->lowest_z = INT_MAX;
 	map = create_map_matrix(data, map);
-	//color_matrix(map);
+	color_matrix(map);
 	clean_up(NULL, tmp);
 	return (map);
 }
