@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/20 12:41:30 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:18:54 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FDF_H
@@ -55,6 +55,12 @@ int				on_close_window(t_p *param);
 int				on_key_down(int keycode, t_p *param);
 int				on_key_release(int keycode, t_p *param);
 int				on_mouse_click(int button, int x, int y, t_p *p);
+
+//callbacks.c
+void			zoom(t_p *p, int keycode);
+int				on_close_window(t_p *p);
+void			change_projection(t_p *p);
+void			translate(t_p *p, int keycode);
 
 //create_graphics
 void			gen_noise(t_p *param);

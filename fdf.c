@@ -86,10 +86,8 @@ void	close_program(t_p *p, t_map *map)
 }
 
 //TODOS:
-// fix zoom crash
 // make transition
 // perror,strerror
-// int_min, int_max ->draw line..
 int	main(int argc, char **argv)
 {
 	t_p			p;

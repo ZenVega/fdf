@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:10:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 17:38:00 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:17:45 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,14 @@
 #define PADDING 0.1			//in %
 
 //Colors
-#define C_ZERO 0xFF00C0F9	//WHITE
+#define C_ZERO 0xFF00C0F9	//NEON_BLUE
 #define C_HIGH 0xFF39FF14	//NEON_GREEN
 #define C_LOW 0xFFFF14AF	//PINK
 
 //CONFIGS
 #define PROJ_MAX 1			//number of projections
 #define ROT_TIMER 2
+#define TRANS_STEP 10
 #define INIT_X_ANG 90.314159
 #define INIT_Y_ANG -0.628319
 #define INIT_Z_ANG -1.884956
@@ -39,6 +40,7 @@
 #define KEY_C 99
 #define KEY_N 110
 #define KEY_P 112
+#define KEY_Q 113
 #define KEY_R 114
 #define KEY_I 111
 #define KEY_O 105
@@ -47,11 +49,15 @@
 #define KEY_ESC 65307
 #define KEY_SHIFT 65505
 #define KEY_BACKSPACE 65288
+#define KEY_ARR_UP 65362
+#define KEY_ARR_LEFT 65361
+#define KEY_ARR_DOWN 65364
+#define KEY_ARR_RIGHT 65363
 
 //MENUE
 #define LINE_HEIGHT 16
 #define TEXT_COL 0xFFFFFFFF
-#define MENU_LEN 20		//items in menu
+#define MENU_LEN 23		//items in menu
 #define M_Y_OFF 80		//Y-Offset
 #define M_X_OFF 30		//X-Offset
 #define M_COL 120		//Column Width
@@ -85,6 +91,7 @@ typedef struct s_vector {
 	double	delta_z;
 	double	pixel_x;
 	double	pixel_y;
+	double	slope;
 	int		pixels;
 }	t_vector;
 

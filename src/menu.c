@@ -23,16 +23,19 @@ void	get_keys(t_menu *menu)
 	menu->keys[7] = "zoom in";
 	menu->keys[8] = "zoom out";
 	menu->keys[9] = "";
-	menu->keys[10] = "scale up";
-	menu->keys[11] = "scale down";
-	menu->keys[12] = "";
-	menu->keys[13] = "toggle noise";
-	menu->keys[14] = "toggle projection";
-	menu->keys[15] = "toggle color";
-	menu->keys[16] = "";
-	menu->keys[17] = "reset";
-	menu->keys[18] = "";
-	menu->keys[19] = "exit";
+	menu->keys[10] = "";
+	menu->keys[11] = "translate";
+	menu->keys[12] = " ";
+	menu->keys[13] = "scale up";
+	menu->keys[14] = "scale down";
+	menu->keys[15] = "";
+	menu->keys[16] = "toggle noise";
+	menu->keys[17] = "toggle projection";
+	menu->keys[18] = "toggle color";
+	menu->keys[19] = "";
+	menu->keys[20] = "reset";
+	menu->keys[21] = "";
+	menu->keys[22] = "exit";
 }
 
 void	get_vals(t_menu *menu)
@@ -47,17 +50,22 @@ void	get_vals(t_menu *menu)
 	menu->vals[7] = "[I] // [Click left]";
 	menu->vals[8] = "[O] // [Click right]";
 	menu->vals[9] = " ";
-	menu->vals[10] = "[S]";
-	menu->vals[11] = "[SHIFT] + [S]";
+	menu->vals[10] = "   [W]";
+	menu->vals[11] = "[A][S][D]";
 	menu->vals[12] = " ";
-	menu->vals[13] = "[N]";
-	menu->vals[14] = "[P]";
-	menu->vals[15] = "[C]";
-	menu->vals[16] = " ";
-	menu->vals[17] = "[X]";
-	menu->vals[18] = " ";
-	menu->vals[19] = "[ESC]";
+	menu->vals[13] = "[Q]";
+	menu->vals[14] = "[SHIFT] + [S]";
+	menu->vals[15] = " ";
+	menu->vals[16] = "[N]";
+	menu->vals[17] = "[P]";
+	menu->vals[18] = "[C]";
+	menu->vals[19] = " ";
+	menu->vals[20] = "[X]";
+	menu->vals[21] = " ";
+	menu->vals[22] = "[ESC]";
 }
+
+//TODO: different scale button
 
 void	print_menu(t_p *p, t_menu *menu)
 {

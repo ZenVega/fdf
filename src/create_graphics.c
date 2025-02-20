@@ -26,20 +26,77 @@ void	pixel_put(t_p *p, int x, int y, unsigned int color)
 		*(unsigned int *)dst = color;
 	}
 }
-t_vector	get_vector(t_point a, t_point b)
+
+void	clip_line(t_p *p, t_vector *v, t_point *a)
+{
+	if (a->proj_x < 0)
+	{
+		a->proj_y = ft_abs(a->proj_x) * v->slope;
+		a->proj_x = 0;
+	}
+	else if (a->proj_x > p->width)
+	{
+		a->proj_y = (a->proj_x - p->width) * v->slope;
+		a->proj_x = p->width;
+	}
+	else if (a->proj_y < 0)
+	{
+		a->proj_x = ft_abs(a->proj_y) * v->slope;
+		a->proj_y = 0;
+	}
+	else if (a->proj_y > p->height)
+	{
+		a->proj_x = (a->proj_y - p->height) * v->slope;
+		a->proj_y = p->height;
+	}
+}
+
+int	validate_line(t_p *p, t_vector *v, t_point *a, t_point *b)
+{
+	if ((a->proj_x < 0 && b->proj_x < 0)
+		|| (a->proj_x > p->width && b->proj_x > p->width)
+		|| (a->proj_y < 0 && b->proj_y < 0)
+		|| (a->proj_y > p->height && b->proj_y > p->height))
+	{
+		v->pixels = 1;
+		return (-1);
+	}
+	if ((a->proj_x > 0 && b->proj_x > 0)
+		&& (a->proj_x < p->width && b->proj_x < p->width)
+		&& (a->proj_y > 0 && b->proj_y > 0)
+		&& (a->proj_y < p->height && b->proj_y < p->height))
+		return (1);
+	if (a->proj_x < 0 || a->proj_y < 0 || a->proj_x > p->width
+		|| a->proj_y < p->height)
+		clip_line(p, v, a);
+	if (b->proj_x < 0 || b->proj_y < 0 || b->proj_x > p->width
+		|| b->proj_y < p->height)
+		clip_line(p, v, b);
+	return (1);
+}
+
+t_vector	get_vector(t_p *p, t_point *a, t_point *b)
 {
 	t_vector		v;
 
-	v.delta_x = b.proj_x - a.proj_x;
-	v.delta_y = b.proj_y - a.proj_y;
-	if (ft_abs(v.delta_x) > ft_abs(v.delta_y))
-		v.pixels = v.delta_x;
+	v.delta_x = b->proj_x - a->proj_x;
+	v.delta_y = b->proj_y - a->proj_y;
+	v.slope = sqrt(pow(v.delta_x, 2) + pow(v.delta_y, 2));
+	if (b->proj_y < a->proj_y || b->proj_x < a->proj_x)
+		v.slope *= -1;
+	if (validate_line(p, &v, a, b) != -1)
+	{
+		if (ft_abs(v.delta_x) > ft_abs(v.delta_y))
+			v.pixels = v.delta_x;
+		else
+			v.pixels = v.delta_y;
+		v.delta_x /= ft_abs(v.pixels);
+		v.delta_y /= ft_abs(v.pixels);
+		v.pixel_x = a->proj_x;
+		v.pixel_y = a->proj_y;
+	}
 	else
-		v.pixels = v.delta_y;
-	v.delta_x /= ft_abs(v.pixels);
-	v.delta_y /= ft_abs(v.pixels);
-	v.pixel_x = a.proj_x;
-	v.pixel_y = a.proj_y;
+		v.pixels = 0;
 	return (v);
 }
 
@@ -49,13 +106,7 @@ void	draw_line(t_p *p, t_point a, t_point b)
 	unsigned int	color;
 	int				i;
 
-	if ( 
-		(a.proj_x < 0 && b.proj_x < 0)
-		|| (a.proj_x > p->width && b.proj_x > p->width)
-		|| (a.proj_y < 0 && b.proj_y < 0)
-		|| (a.proj_y > p->height && b.proj_y > p->height))
-		return ;
-	v = get_vector(a, b);
+	v = get_vector(p, &a, &b);
 	i = 0;
 	while (i < ft_abs(v.pixels))
 	{
