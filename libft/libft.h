@@ -24,8 +24,10 @@ typedef struct s_list
 }	t_list;
 
 int		ft_atoi(const char *nptr);
+int		ft_atoi_base(const char *nptr, char *base);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+int		ft_get_base(char *base);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);
 int		ft_isdigit(int c);

@@ -12,6 +12,7 @@
 
 CFILES = \
 ft_atoi.c\
+ft_atoi_base.c\
 ft_bzero.c\
 ft_calloc.c\
 ft_isalpha.c\
@@ -71,7 +72,7 @@ DEPS = libft.h
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=leak
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=leak
 
 NAME = libft.a
 

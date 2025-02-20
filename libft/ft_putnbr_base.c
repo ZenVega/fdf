@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	get_base(char *base)
+int	ft_get_base(char *base)
 {
 	int	counter;
 	int	compare_counter;
@@ -53,7 +53,7 @@ int	ft_putnbr_base(long long nbr, char *base)
 		len++;
 	}
 	temp = nbr;
-	radix = get_base(base);
+	radix = ft_get_base(base);
 	if (!radix)
 		return (0);
 	while (temp)

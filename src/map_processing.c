@@ -60,9 +60,13 @@ static void	create_point(t_map *map, int i, int j, char **vals)
 	if (contains_comma(vals[j]) != -1)
 	{
 		splitted = ft_split(vals[j], ',');
-		alt = ft_atoi(splitted[0]);
-		//base to ul
-		col = (unsigned long)splitted[1] | (0xFF << 24);
+		if (splitted)
+		{
+			alt = ft_atoi(splitted[0]);
+			if (splitted[1])
+				col = ft_atoi_base(splitted[1], "0123456789abcdef")
+					| (0xFF << 24);
+		}
 	}
 	else
 		alt = ft_atoi(vals[j]);
@@ -77,7 +81,11 @@ static void	create_point(t_map *map, int i, int j, char **vals)
 		map->lowest_z = dest->z;
 	free(vals[j]);
 	if (splitted)
+	{
+		free(splitted[0]);
+		free(splitted[1]);
 		free(splitted);
+	}
 }
 
 t_map	*create_map_matrix(t_list *data, t_map *map)
