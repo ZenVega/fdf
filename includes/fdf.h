@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 17:36:19 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:41:30 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FDF_H
@@ -60,7 +60,7 @@ int				on_mouse_click(int button, int x, int y, t_p *p);
 void			gen_noise(t_p *param);
 void			draw_noisy_square(t_p param);
 void			draw_line(t_p *p, t_point a, t_point b);
-void			pixel_put(t_img *data, int x, int y, unsigned int color);
+void			pixel_put(t_p *p, int x, int y, unsigned int color);
 void			draw_mouse_vector(t_p *p);
 
 //rotations.c

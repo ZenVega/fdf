@@ -16,7 +16,7 @@
 #define PADDING 0.1			//in %
 
 //Colors
-#define C_ZERO 0xFFFFFFFF	//WHITE
+#define C_ZERO 0xFF00C0F9	//WHITE
 #define C_HIGH 0xFF39FF14	//NEON_GREEN
 #define C_LOW 0xFFFF14AF	//PINK
 

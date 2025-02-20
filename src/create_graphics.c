@@ -6,17 +6,19 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:20:32 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/17 14:07:24 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:52:43 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	pixel_put(t_img *img, int x, int y, unsigned int color)
+void	pixel_put(t_p *p, int x, int y, unsigned int color)
 {
 	int		offset;
 	char	*dst;
+	t_img	*img;
 
+	img = &p->img;
 	if (x > 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
 	{
 		offset = y * img->line_length + x * (img->bits_per_pixel / 8);
@@ -24,31 +26,30 @@ void	pixel_put(t_img *img, int x, int y, unsigned int color)
 		*(unsigned int *)dst = color;
 	}
 }
-
 t_vector	get_vector(t_point a, t_point b)
 {
 	t_vector		v;
 
 	v.delta_x = b.proj_x - a.proj_x;
 	v.delta_y = b.proj_y - a.proj_y;
-	if (v.delta_x > v.delta_y)
+	if (ft_abs(v.delta_x) > ft_abs(v.delta_y))
 		v.pixels = v.delta_x;
 	else
 		v.pixels = v.delta_y;
-	v.delta_x /= v.pixels;
-	v.delta_y /= v.pixels;
-	v.delta_z = ((b.z - a.z) / (double)v.pixels);
+	v.delta_x /= ft_abs(v.pixels);
+	v.delta_y /= ft_abs(v.pixels);
 	v.pixel_x = a.proj_x;
 	v.pixel_y = a.proj_y;
 	return (v);
 }
+
 void	draw_line(t_p *p, t_point a, t_point b)
 {
 	t_vector		v;
 	unsigned int	color;
 	int				i;
 
-	if (
+	if ( 
 		(a.proj_x < 0 && b.proj_x < 0)
 		|| (a.proj_x > p->width && b.proj_x > p->width)
 		|| (a.proj_y < 0 && b.proj_y < 0)
@@ -56,13 +57,13 @@ void	draw_line(t_p *p, t_point a, t_point b)
 		return ;
 	v = get_vector(a, b);
 	i = 0;
-	while (i < v.pixels)
+	while (i < ft_abs(v.pixels))
 	{
 		if (p->syscol == 1)
-			color = get_grad_col(i, v.pixels, a.color, b.color);
+			color = get_grad_col(i, ft_abs(v.pixels), a.color, b.color);
 		else
-			color = get_grad_col(i, v.pixels, a.color_height, b.color_height);
-		pixel_put(&p->img, (int)v.pixel_x, (int)v.pixel_y, color);
+			color = get_grad_col(i, ft_abs(v.pixels), a.color_height, b.color_height);
+		pixel_put(p, round(v.pixel_x), round(v.pixel_y), color);
 		v.pixel_x += v.delta_x;
 		v.pixel_y += v.delta_y;
 		i++;
@@ -83,7 +84,7 @@ void	gen_noise(t_p *p)
 	{
 		color = get_grad_col(x, p->width, 0xFFFF0000, 0xFF0000FF);
 		if (random() > RAND_MAX / 1.15)
-			pixel_put(&p->img, x, y, color);
+			pixel_put(p, x, y, color);
 		x++;
 		if (x > p->width)
 		{
@@ -104,7 +105,7 @@ void	draw_noisy_square(t_p p)
 	{
 		if (x > p.width / 3 && x < p.width - (p.width / 3))
 			if (random() > RAND_MAX / 1.15)
-				pixel_put(&p.img, x, y, 0xFF00FF00);
+				pixel_put(&p, x, y, 0xFF00FF00);
 		x++;
 		if (x > p.width)
 		{

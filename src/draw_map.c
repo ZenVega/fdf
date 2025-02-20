@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:06:37 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/17 15:14:45 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:45:49 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	map_to_img(t_p *p)
 				draw_line(p, matrix[i][j], matrix[i][j + 1]);
 			if (!(i == p->map->depth - 1))
 				draw_line(p, matrix[i][j], matrix[i + 1][j]);
-			pixel_put(&p->img, matrix[i][j].proj_x,
+			pixel_put(p, matrix[i][j].proj_x,
 				matrix[i][j].proj_y, col);
 			i++;
 		}

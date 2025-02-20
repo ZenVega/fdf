@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 16:41:43 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/07 16:48:48 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:13:07 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 }	t_list;
 
 int		ft_atoi(const char *nptr);
+double	ft_abs(double a);
 int		ft_atoi_base(const char *nptr, char *base);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);

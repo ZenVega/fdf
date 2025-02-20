@@ -6,12 +6,12 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 17:41:00 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:48:06 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "includes/fdf.h"
 
-void	reset_img(t_img img, int width, int height)
+void	reset_img(t_p *p, int width, int height)
 {
 	int	i;
 	int	x;
@@ -22,7 +22,7 @@ void	reset_img(t_img img, int width, int height)
 	y = 0;
 	while (i++ < width * height)
 	{
-		pixel_put(&img, x, y, 0x0);
+		pixel_put(p, x, y, 0x0);
 		x++;
 		if (x > width)
 		{
@@ -60,7 +60,7 @@ int	render_frames(t_p *p)
 	img = p->img;
 	if (img.img == NULL)
 		return (0);
-	reset_img(img, p->width, p->height);
+	reset_img(p, p->width, p->height);
 	if (p->noise == 1)
 		gen_noise(p);
 	if (p->x_rot != 0 || p->y_rot != 0 || p->z_rot != 0)
@@ -90,7 +90,6 @@ void	close_program(t_p *p, t_map *map)
 // make transition
 // perror,strerror
 // int_min, int_max ->draw line..
-// sys color wrong
 int	main(int argc, char **argv)
 {
 	t_p			p;

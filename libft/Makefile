@@ -6,12 +6,13 @@
 #    By: uschmidt <uschmidt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/19 10:42:30 by uschmidt          #+#    #+#              #
-#    Updated: 2025/01/22 13:07:08 by uschmidt         ###   ########.fr        #
+#    Updated: 2025/02/20 11:39:19 by uschmidt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFILES = \
 ft_atoi.c\
+ft_abs.c\
 ft_atoi_base.c\
 ft_bzero.c\
 ft_calloc.c\
