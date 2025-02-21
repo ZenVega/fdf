@@ -66,6 +66,9 @@ static void	key_ascii(int keycode, t_p *p)
 		|| keycode == KEY_SEMIC || keycode == KEY_COMMA
 		|| keycode == KEY_DOT || keycode == KEY_SLASH)
 		rotate(p, keycode);
+	if (keycode == KEY_W || keycode == KEY_A
+		|| keycode == KEY_S || keycode == KEY_D)
+		translate(p, keycode);
 }
 
 int	on_key_down(int keycode, t_p *p)

@@ -54,7 +54,7 @@ void	get_vals(t_menu *menu)
 	menu->vals[11] = "[A][S][D]";
 	menu->vals[12] = " ";
 	menu->vals[13] = "[Q]";
-	menu->vals[14] = "[SHIFT] + [S]";
+	menu->vals[14] = "[SHIFT] + [Q]";
 	menu->vals[15] = " ";
 	menu->vals[16] = "[N]";
 	menu->vals[17] = "[P]";
