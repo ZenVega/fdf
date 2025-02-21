@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/20 12:48:06 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:55:36 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "includes/fdf.h"
@@ -86,7 +86,6 @@ void	close_program(t_p *p, t_map *map)
 }
 
 //TODOS:
-// make transition
 // perror,strerror
 int	main(int argc, char **argv)
 {

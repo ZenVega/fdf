@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/20 18:24:25 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 10:55:09 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FDF_H
@@ -80,6 +80,9 @@ void			permanent_rotation(t_p *p, int keycode);
 
 //draw_map.c
 void			draw_map(t_p *p);
+
+//draw_line.c
+void			draw_line(t_p *p, t_point a, t_point b);
 
 //menu.c
 void			get_keys(t_menu *menu);
