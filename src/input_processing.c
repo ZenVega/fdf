@@ -6,25 +6,29 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:18:20 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 15:46:17 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:00:08 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static void	remove_nl(char *line)
+static int	remove_nl(char *line)
 {
 	int	i;
 
 	if (!line)
-		return ;
+		return (-1);
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] == '\n')
+		{
 			line[i] = 0;
+			return (i);
+		}
 		i++;
 	}
+	return (i);
 }
 
 int	load_data(t_list **data, char **argv)
@@ -53,5 +57,6 @@ int	load_data(t_list **data, char **argv)
 		ft_lstadd_back(data, tmp);
 		height++;
 	}
+	close(fd);
 	return (height);
 }

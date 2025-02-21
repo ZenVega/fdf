@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:53:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/21 12:15:12 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:34:53 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ static void	key_ascii(int keycode, t_p *p)
 
 int	on_key_down(int keycode, t_p *p)
 {
-	ft_printf("%d\n", keycode);
 	if (keycode > 177)
 		key_extra(keycode, p);
 	else

@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:19:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/17 12:27:23 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:13:29 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static void	create_point(t_map *map, int i, int j, char **vals)
 		{
 			alt = ft_atoi(splitted[0]);
 			if (splitted[1])
+				// HEX_MACRO
 				col = ft_atoi_base(splitted[1], "0123456789abcdef")
 					| (0xFF << 24);
 		}
@@ -81,11 +82,7 @@ static void	create_point(t_map *map, int i, int j, char **vals)
 		map->lowest_z = dest->z;
 	free(vals[j]);
 	if (splitted)
-	{
-		free(splitted[0]);
-		free(splitted[1]);
-		free(splitted);
-	}
+		(free(splitted[0]), free(splitted[1]), free(splitted));
 }
 
 t_map	*create_map_matrix(t_list *data, t_map *map)

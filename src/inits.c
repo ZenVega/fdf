@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:22:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/21 12:04:41 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:19:36 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,13 @@ t_map	*init_map(t_list *data, int height)
 	if (!map->matrix)
 		return (clean_up(map, data), NULL);
 	map->width = get_map_width(data->content);
+	while (tmp)
+	{
+		if (map->width != get_map_width(tmp->content))
+			return (clean_up(map, tmp), NULL);
+		tmp = tmp->next;
+	}
+	tmp = data;
 	map->depth = height;
 	map->highest_z = INT_MIN;
 	map->lowest_z = INT_MAX;

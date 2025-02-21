@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/21 11:30:45 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:18:33 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "includes/fdf.h"
@@ -84,8 +84,6 @@ void	close_program(t_p *p, t_map *map)
 	clean_up(map, NULL);
 }
 
-//TODOS:
-// perror,strerror
 int	main(int argc, char **argv)
 {
 	t_p			p;
@@ -95,11 +93,13 @@ int	main(int argc, char **argv)
 
 	data = NULL;
 	if (argc != 2)
-		return (ft_printf("No Map"), 0);
+		return (errno = ENOENT, perror("./fdf <No Map>"), 1);
 	map_height = load_data(&data, argv);
 	if (!map_height)
-		return (ft_printf("No Map"), 0);
+		return (errno = EIO, perror("./fdf <No Map>"), 1);
 	map = init_map(data, map_height);
+	if (map == NULL)
+		return (errno = EIO, perror("./fdf <No Map>"), 1);
 	p = init_img();
 	p.map = map;
 	init_input_hooks(&p);
@@ -107,4 +107,5 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(p.mlx, render_frames, &p);
 	mlx_loop(p.mlx);
 	close_program(&p, map);
+	return (0);
 }

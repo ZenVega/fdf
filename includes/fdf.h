@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 10:46:15 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/21 10:55:09 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:52:42 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #ifndef FDF_H
@@ -23,6 +23,7 @@
 # include <limits.h>
 # include <math.h>
 # include <stdlib.h>
+# include <errno.h>
 # include <unistd.h>
 
 //fdf.c
