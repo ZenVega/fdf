@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 14:20:32 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/21 10:54:24 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:31:09 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,34 @@ void	pixel_put(t_p *p, int x, int y, unsigned int color)
 
 void	gen_noise(t_p *p)
 {
-	int	i;
 	int	x;
 	int	y;
 	int	color;
 
-	i = 0;
-	x = 0;
-	y = 0;
-	while (i++ < p->width * p->height)
+	x = -1;
+	y = -1;
+	if (p->noise.on == -1 && p->noise.intensity <= 0)
+		return ;
+	if (p->noise.on == -1)
+		p->noise.intensity -= 0.02;
+	if (p->noise.on == 1)
 	{
-		color = get_grad_col(x, p->width, 0xFFFF0000, 0xFF0000FF);
-		if (random() > RAND_MAX / 1.15)
-			pixel_put(p, x, y, color);
+		p->noise.intensity += 0.03;
+		if (p->noise.intensity >= 1)
+			p->noise.intensity = 1;
+	}
+	while (y <= p->height)
+	{
 		x++;
-		if (x > p->width)
+		if (random() * p->noise.intensity > RAND_MAX / 1.15)
 		{
-			y++;
+			color = get_grad_col(y, p->height, C_NEON_BLUE, C_NEON_RED);
+			pixel_put(p, x, y, color);
+		}
+		if (x >= p->width)
+		{
 			x = 0;
+			y++;
 		}
 	}
 }

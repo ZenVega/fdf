@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 15:53:39 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/20 18:21:21 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:15:12 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	key_extra(int keycode, t_p *p)
 static void	key_ascii(int keycode, t_p *p)
 {
 	if (keycode == KEY_N)
-		p->noise = -p->noise;
+		p->noise.on = -p->noise.on;
 	if (keycode == KEY_P)
 		change_projection(p);
 	if (keycode == KEY_X)

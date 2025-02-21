@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 11:15:01 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/21 10:55:36 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:30:45 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "includes/fdf.h"
@@ -61,8 +61,7 @@ int	render_frames(t_p *p)
 	if (img.img == NULL)
 		return (0);
 	reset_img(p, p->width, p->height);
-	if (p->noise == 1)
-		gen_noise(p);
+	gen_noise(p);
 	if (p->x_rot != 0 || p->y_rot != 0 || p->z_rot != 0)
 		rot_sequence(p);
 	draw_map(p);

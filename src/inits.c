@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:22:56 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/18 17:36:41 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:04:41 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	reset_params(t_p *p)
 {
-	p->noise = -1;
+	p->noise.on = -1;
+	p->noise.intensity = 0;
 	p->x_rot = 0;
 	p->y_rot = 0;
 	p->z_rot = 0;

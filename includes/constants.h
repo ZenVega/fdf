@@ -6,7 +6,7 @@
 /*   By: uschmidt <uschmidt@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 17:10:24 by uschmidt          #+#    #+#             */
-/*   Updated: 2025/02/20 18:17:45 by uschmidt         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:30:33 by uschmidt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 #define C_ZERO 0xFF00C0F9	//NEON_BLUE
 #define C_HIGH 0xFF39FF14	//NEON_GREEN
 #define C_LOW 0xFFFF14AF	//PINK
+#define C_NEON_VIOLET 0xFFAB20FD
+#define C_NEON_YELLOW 0xFFCFFF04
+#define C_GREY 0xFF888888
+#define C_WHITE 0xFFFFFFFF
+#define C_NEON_BLUE 0xFF006AF9
+#define C_NEON_RED 0xFFE53C6C
+#define C_PURE_RED 0xFFFF0000
+#define C_PURE_BLUE 0xFF0000FF
 
 //CONFIGS
 #define PROJ_MAX 1			//number of projections
@@ -120,6 +128,11 @@ typedef struct s_map {
 	t_point	**matrix;
 }	t_map;
 
+typedef struct s_noise {
+	int		on;
+	float	intensity;
+}	t_noise;
+
 typedef struct s_ang {
 	double	ang_x;
 	double	ang_y;
@@ -142,7 +155,7 @@ typedef struct s_p {
 	int			height;
 	int			mouse_x;
 	int			mouse_y;
-	int			noise;
+	t_noise		noise;
 	int			syscol;
 	int			projection;
 	int			shifted;
