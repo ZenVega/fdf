@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-#include <limits.h>
 
 void	color_matrix(t_map *map)
 {
@@ -37,40 +36,41 @@ void	color_matrix(t_map *map)
 		x++;
 	}
 }
-int	contains_comma(char *str)
-{
-	int	i;
 
+void	extract_from_str(char *str, unsigned long *col, unsigned int *alt)
+{
+	int		i;
+	char	**splitted;
+
+	splitted = NULL;
 	i = -1;
 	while (str[++i])
 		if (str[i] == ',')
-			return (i);
-	return (-1);
+			break ;
+	if (str[i] != ',')
+		*alt = ft_atoi(str);
+	else
+	{
+		splitted = ft_split(str, ',');
+		if (splitted)
+		{
+			*alt = ft_atoi(splitted[0]);
+			if (splitted[1])
+				*col = ft_atoi_base(splitted[1], HEX) | (0xFF << 24);
+		}
+	}
+	if (splitted)
+		(free(splitted[0]), free(splitted[1]), free(splitted));
 }
 
 static void	create_point(t_map *map, int i, int j, char **vals)
 {
 	t_point			*dest;
-	char			**splitted;
 	unsigned int	alt;
 	unsigned long	col;
 
 	col = C_ZERO;
-	splitted = NULL;
-	if (contains_comma(vals[j]) != -1)
-	{
-		splitted = ft_split(vals[j], ',');
-		if (splitted)
-		{
-			alt = ft_atoi(splitted[0]);
-			if (splitted[1])
-				// HEX_MACRO
-				col = ft_atoi_base(splitted[1], "0123456789abcdef")
-					| (0xFF << 24);
-		}
-	}
-	else
-		alt = ft_atoi(vals[j]);
+	extract_from_str(vals[j], &col, &alt);
 	dest = &map->matrix[i][j];
 	dest->x = j - map->width / 2;
 	dest->y = i - map->depth / 2;
@@ -81,8 +81,6 @@ static void	create_point(t_map *map, int i, int j, char **vals)
 	if (dest->z < map->lowest_z)
 		map->lowest_z = dest->z;
 	free(vals[j]);
-	if (splitted)
-		(free(splitted[0]), free(splitted[1]), free(splitted));
 }
 
 t_map	*create_map_matrix(t_list *data, t_map *map)

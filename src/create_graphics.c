@@ -31,7 +31,6 @@ void	gen_noise(t_p *p)
 {
 	int	x;
 	int	y;
-	int	color;
 
 	x = -1;
 	y = -1;
@@ -47,37 +46,11 @@ void	gen_noise(t_p *p)
 	}
 	while (y <= p->height)
 	{
-		x++;
+		if (++x >= p->width && ++y > -2)
+			x = 0;
 		if (random() * p->noise.intensity > RAND_MAX / 1.15)
 		{
-			color = get_grad_col(y, p->height, C_NEON_BLUE, C_NEON_RED);
-			pixel_put(p, x, y, color);
-		}
-		if (x >= p->width)
-		{
-			x = 0;
-			y++;
-		}
-	}
-}
-
-void	draw_noisy_square(t_p p)
-{
-	int	x;
-	int	y;
-
-	x = p.width / 3;
-	y = p.height / 3;
-	while (y < p.height - (p.height / 3))
-	{
-		if (x > p.width / 3 && x < p.width - (p.width / 3))
-			if (random() > RAND_MAX / 1.15)
-				pixel_put(&p, x, y, 0xFF00FF00);
-		x++;
-		if (x > p.width)
-		{
-			y++;
-			x = 0;
+			pixel_put(p, x, y, get_grad_col(y, p->height, C_NN_BLUE, C_NN_RED));
 		}
 	}
 }

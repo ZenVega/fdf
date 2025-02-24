@@ -65,8 +65,6 @@ void	get_vals(t_menu *menu)
 	menu->vals[22] = "[ESC]";
 }
 
-//TODO: different scale button
-
 void	print_menu(t_p *p, t_menu *menu)
 {
 	int		i;

@@ -14,6 +14,7 @@
 #define WIN_WIDTH 1920
 #define WIN_HEIGHT 1080
 #define PADDING 0.1			//in %
+#define HEX "0123456789abcdef"
 
 //Colors
 #define C_ZERO 0xFF00C0F9	//NEON_BLUE
@@ -23,8 +24,8 @@
 #define C_NEON_YELLOW 0xFFCFFF04
 #define C_GREY 0xFF888888
 #define C_WHITE 0xFFFFFFFF
-#define C_NEON_BLUE 0xFF006AF9
-#define C_NEON_RED 0xFFE53C6C
+#define C_NN_BLUE 0xFF006AF9
+#define C_NN_RED 0xFFE53C6C
 #define C_PURE_RED 0xFFFF0000
 #define C_PURE_BLUE 0xFF0000FF
 

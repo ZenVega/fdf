@@ -64,14 +64,14 @@ t_vector	get_vector(t_p *p, t_point *a, t_point *b)
 {
 	t_vector		v;
 
-	v.delta_x = b->proj_x - a->proj_x;
-	v.delta_y = b->proj_y - a->proj_y;
-	if (v.delta_x != 0)
-		v.slope = v.delta_y / (double)v.delta_x;
+	if (b->proj_x - a->proj_x != 0)
+		v.slope = (b->proj_y - a->proj_y) / (double)(b->proj_x - a->proj_x);
 	else
 		v.slope = 1;
 	if (validate_line(p, &v, a, b) != -1)
 	{
+		v.delta_x = b->proj_x - a->proj_x;
+		v.delta_y = b->proj_y - a->proj_y;
 		if (ft_abs(v.delta_x) > ft_abs(v.delta_y))
 			v.pixels = v.delta_x;
 		else
@@ -101,7 +101,8 @@ void	draw_line(t_p *p, t_point a, t_point b)
 		if (p->syscol == 1)
 			color = get_grad_col(i, ft_abs(v.pixels), a.color, b.color);
 		else
-			color = get_grad_col(i, ft_abs(v.pixels), a.color_height, b.color_height);
+			color = get_grad_col(i, ft_abs(v.pixels), a.color_height,
+					b.color_height);
 		pixel_put(p, round(v.pixel_x), round(v.pixel_y), color);
 		v.pixel_x += v.delta_x;
 		v.pixel_y += v.delta_y;

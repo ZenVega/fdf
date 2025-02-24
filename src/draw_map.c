@@ -39,6 +39,7 @@ void	draw_proj(t_proj *proj, t_p *p)
 		i++;
 	}
 }
+
 void	map_to_img(t_p *p)
 {
 	int				j;

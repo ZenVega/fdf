@@ -31,17 +31,25 @@ static int	remove_nl(char *line)
 	return (i);
 }
 
-int	load_data(t_list **data, char **argv)
+static int	get_fd(char *map)
 {
 	int		fd;
-	t_list	*tmp;
 	char	*path;
-	char	*line;
-	int		height;
 
-	path = ft_strjoin("./maps/", argv[1]);
+	path = ft_strjoin("./maps/", map);
 	fd = open(path, O_RDONLY);
 	free(path);
+	return (fd);
+}
+
+int	load_data(t_list **data, char **argv)
+{
+	t_list	*tmp;
+	char	*line;
+	int		height;
+	int		fd;
+
+	fd = get_fd(argv[1]);
 	if (fd == -1)
 		return (0);
 	height = 0;

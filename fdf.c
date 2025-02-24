@@ -54,9 +54,7 @@ void	rot_sequence(t_p *p)
 int	render_frames(t_p *p)
 {
 	t_img		img;
-	int			col;
 
-	col = 0xFF8F8F8F;
 	img = p->img;
 	if (img.img == NULL)
 		return (0);
@@ -66,7 +64,6 @@ int	render_frames(t_p *p)
 		rot_sequence(p);
 	draw_map(p);
 	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
-	mlx_string_put(p->mlx, p->win, p->mouse_x, p->mouse_y, col, "<-ok_shit");
 	print_menu(p, &p->menu);
 	return (0);
 }
