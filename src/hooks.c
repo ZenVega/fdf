@@ -16,6 +16,7 @@ int	on_mouse_click(int button, int x, int y, t_p *p)
 {
 	double	zoom_factor;
 
+	zoom_factor = 1;
 	if (button == 1)
 		zoom_factor = p->zoom - p->zoom * .2;
 	else if (button == 3)

@@ -35,7 +35,7 @@ INC			= \
 DEPS		= includes/fdf.h\
 			  gnl/get_next_line.h
 
-CC			= gcc
+CC			= cc
 
 CFLAGS		= -g -Wall -Wextra -Werror
 
@@ -45,6 +45,11 @@ all: $(NAME)
 
 debug: $(NAME)
 	gdb --args ./fdf $(MAP).fdf
+
+norm:
+	norminette fdf.c
+	norminette src/*
+	norminette includes/*
 
 $(NAME): $(OFILES) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) -o $(NAME) $(OFILES) $(MLX) $(LIBFT) $(INC) -lXext -lX11 -lm -lz
@@ -70,4 +75,4 @@ fclean:	clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug norm
