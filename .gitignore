@@ -1,2 +1,6 @@
 **/*.o
-fractol
+fdf
+libft/libft.a
+minilibx/libmlx.a
+minilibx/libmlx_Linux.a
+minilibx/test/mlx-test
