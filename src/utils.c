@@ -12,27 +12,19 @@
 
 #include "../includes/fdf.h"
 
-unsigned int	shift_to_white(unsigned int color, int shift_val)
+void	pixel_put(t_p *p, int x, int y, unsigned int color)
 {
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-	unsigned int	a;
-	float			factor;
+	int		offset;
+	char	*dst;
+	t_img	*img;
 
-	if (shift_val < 0)
-		shift_val = 0;
-	if (shift_val > 16)
-		shift_val = 16;
-	factor = shift_val / 16.0f;
-	r = (color >> 16) & 0xFF;
-	g = (color >> 8) & 0xFF;
-	b = color & 0xFF;
-	a = (color >> 24) & 0xFF;
-	r = r + (255 - r) * factor;
-	g = g + (255 - g) * factor;
-	b = b + (255 - b) * factor;
-	return ((a << 24) | (r << 16) | (g << 8) | b);
+	img = &p->img;
+	if (x > 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
+	{
+		offset = y * img->line_length + x * (img->bits_per_pixel / 8);
+		dst = img->addr + offset;
+		*(unsigned int *)dst = color;
+	}
 }
 
 unsigned int	get_grad_col(int val, int max,
@@ -54,11 +46,6 @@ unsigned int	get_grad_col(int val, int max,
 		| ((c_min & 0xFF) + (int)(factor * d_b)));
 }
 
-int	create_argb(int a, int r, int g, int b)
-{
-	return (a << 24 | r << 16 | g << 8 | b);
-}
-
 void	clean_up(t_map *map, t_list *data)
 {
 	int	i;
@@ -75,4 +62,17 @@ void	clean_up(t_map *map, t_list *data)
 	}
 	if (map)
 		(free(map), map = NULL);
+}
+
+void	close_program(t_p *p, t_map *map)
+{
+	if (p->img.img)
+		mlx_destroy_image(p->mlx, p->img.img);
+	p->img.img = NULL;
+	if (p->win)
+		mlx_destroy_window(p->mlx, p->win);
+	mlx_destroy_display(p->mlx);
+	free(p->mlx);
+	p->mlx = NULL;
+	clean_up(map, NULL);
 }

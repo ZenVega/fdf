@@ -12,6 +12,19 @@
 
 #include "../includes/fdf.h"
 
+void	get_angles(t_ang *angles, double ang_x, double ang_y, double ang_z)
+{
+	angles->ang_x = ang_x;
+	angles->ang_y = ang_y;
+	angles->ang_z = ang_z;
+	angles->sin_x = sin(ang_x);
+	angles->cos_x = cos(ang_x);
+	angles->sin_y = sin(ang_y);
+	angles->cos_y = cos(ang_y);
+	angles->sin_z = sin(ang_z);
+	angles->cos_z = cos(ang_z);
+}
+
 void	permanent_rotation(t_p *p, int keycode)
 {
 	if (keycode == KEY_SB_OPEN)
@@ -79,17 +92,4 @@ void	project_point(t_point *point, t_proj proj)
 			- point->rot_y) * (proj.x_step / 2);
 	point->proj_y = proj.y_start + (point->rot_x
 			+ point->rot_y) * (proj.y_step / 2) - (point->z * proj.y_step) / 6;
-}
-
-void	get_angles(t_ang *angles, double ang_x, double ang_y, double ang_z)
-{
-	angles->ang_x = ang_x;
-	angles->ang_y = ang_y;
-	angles->ang_z = ang_z;
-	angles->sin_x = sin(ang_x);
-	angles->cos_x = cos(ang_x);
-	angles->sin_y = sin(ang_y);
-	angles->cos_y = cos(ang_y);
-	angles->sin_z = sin(ang_z);
-	angles->cos_z = cos(ang_z);
 }

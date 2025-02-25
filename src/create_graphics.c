@@ -12,21 +12,6 @@
 
 #include "../includes/fdf.h"
 
-void	pixel_put(t_p *p, int x, int y, unsigned int color)
-{
-	int		offset;
-	char	*dst;
-	t_img	*img;
-
-	img = &p->img;
-	if (x > 0 && x < WIN_WIDTH && y > 0 && y < WIN_HEIGHT)
-	{
-		offset = y * img->line_length + x * (img->bits_per_pixel / 8);
-		dst = img->addr + offset;
-		*(unsigned int *)dst = color;
-	}
-}
-
 void	gen_noise(t_p *p)
 {
 	int	x;
@@ -53,4 +38,42 @@ void	gen_noise(t_p *p)
 			pixel_put(p, x, y, get_grad_col(y, p->height, C_NN_BLUE, C_NN_RED));
 		}
 	}
+}
+
+void	reset_img(t_p *p, int width, int height)
+{
+	int	i;
+	int	x;
+	int	y;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	while (i++ < width * height)
+	{
+		pixel_put(p, x, y, 0x0);
+		x++;
+		if (x > width)
+		{
+			y++;
+			x = 0;
+		}
+	}
+}
+
+int	render_frames(t_p *p)
+{
+	t_img		img;
+
+	img = p->img;
+	if (img.img == NULL)
+		return (0);
+	reset_img(p, p->width, p->height);
+	gen_noise(p);
+	if (p->x_rot != 0 || p->y_rot != 0 || p->z_rot != 0)
+		rot_sequence(p);
+	draw_map(p);
+	mlx_put_image_to_window(p->mlx, p->win, img.img, 0, 0);
+	print_menu(p, &p->menu);
+	return (0);
 }

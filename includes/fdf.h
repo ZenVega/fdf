@@ -45,11 +45,11 @@ void			reset_params(t_p *p);
 void			init_menu(t_p *p);
 
 //utils.c
-unsigned int	shift_to_white(unsigned int color, int shift_val);
+void			pixel_put(t_p *p, int x, int y, unsigned int color);
 unsigned int	get_grad_col(int val, int max, unsigned int c_min,
 					unsigned int c_max);
-int				on_resize(void);
 void			clean_up(t_map *map, t_list *data);
+void			close_program(t_p *p, t_map *map);
 
 //hooks.c
 int				on_close_window(t_p *param);
@@ -62,22 +62,20 @@ void			zoom(t_p *p, int keycode);
 int				on_close_window(t_p *p);
 void			change_projection(t_p *p);
 void			translate(t_p *p, int keycode);
+void			rot_sequence(t_p *p);
 
 //create_graphics
 void			gen_noise(t_p *param);
-void			draw_noisy_square(t_p param);
-void			draw_line(t_p *p, t_point a, t_point b);
-void			pixel_put(t_p *p, int x, int y, unsigned int color);
-void			draw_mouse_vector(t_p *p);
+void			reset_img(t_p *p, int width, int height);
+int				render_frames(t_p *p);
 
 //rotations.c
 void			get_angles(t_ang *angles,
 					double ang_x, double ang_y, double ang_z);
+void			permanent_rotation(t_p *p, int keycode);
 void			rotate(t_p *p, int keycode);
-void			calc_point(int x, int y, t_proj proj, t_p *p);
 void			rotate_point(t_point *point, t_p *p);
 void			project_point(t_point *point, t_proj proj);
-void			permanent_rotation(t_p *p, int keycode);
 
 //draw_map.c
 void			draw_map(t_p *p);

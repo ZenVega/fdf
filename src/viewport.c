@@ -50,3 +50,23 @@ void	translate(t_p *p, int keycode)
 	if (keycode == KEY_ARR_RIGHT || keycode == KEY_D)
 		p->center_x = (p->center_x + TRANS_STEP);
 }
+
+void	rot_sequence(t_p *p)
+{
+	if (--p->rot_timer > 0)
+		return ;
+	if (p->x_rot == -1)
+		rotate(p, KEY_SB_OPEN);
+	else if (p->x_rot == 1)
+		rotate(p, KEY_SB_CLOSE);
+	if (p->y_rot == -1)
+		rotate(p, KEY_SEMIC);
+	else if (p->y_rot == 1)
+		rotate(p, KEY_COMMA);
+	if (p->z_rot == -1)
+		rotate(p, KEY_DOT);
+	else if (p->z_rot == 1)
+		rotate(p, KEY_SLASH);
+	p->rot_timer = p->rot_speed;
+}
+
