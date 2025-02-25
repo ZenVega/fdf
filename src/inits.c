@@ -62,7 +62,7 @@ t_map	*init_map(t_list *data, int height)
 	while (tmp)
 	{
 		if (map->width != get_map_width(tmp->content))
-			return (clean_up(map, tmp), NULL);
+			return (clean_up(map, data), NULL);
 		tmp = tmp->next;
 	}
 	tmp = data;

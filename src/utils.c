@@ -50,9 +50,11 @@ void	clean_up(t_map *map, t_list *data)
 {
 	int	i;
 
-	ft_lstclear(&data, free);
 	if (data)
+	{
+		ft_lstclear(&data, free);
 		(free(data), data = NULL);
+	}
 	if (map && map->matrix)
 	{
 		i = 0;
