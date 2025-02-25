@@ -69,4 +69,3 @@ void	rot_sequence(t_p *p)
 		rotate(p, KEY_SLASH);
 	p->rot_timer = p->rot_speed;
 }
-
