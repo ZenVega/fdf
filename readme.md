@@ -2,10 +2,10 @@
 
 
 This repository contains a **graphical interface** built in **C** using the [MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx) library, which is based on the [X Window System (X11)](https://x.org/wiki/).  
+Pass a file formatted similarly to those in the **maps** folder to visualize it as a **3D wireframe projection**.  
 
 ![Rotating Pylon](images/pylone_high_fr.gif)
 
-Pass a file formatted similarly to those in the **maps** folder to visualize it as a **3D wireframe projection**.  
 
 ![3D Diagram](images/t1.png)
 ![Julia Fractal](images/julia.png)
