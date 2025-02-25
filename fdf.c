@@ -19,14 +19,16 @@ int	main(int argc, char **argv)
 	int			map_height;
 
 	data = NULL;
-	if (argc != 2)
+	if (argc < 2)
 		return (errno = ENOENT, perror("./fdf <No Map>"), 1);
+	if (argc != 2)
+		return (errno = ENOENT, perror("./fdf <too many arguments>"), 1);
 	map_height = load_data(&data, argv);
 	if (!map_height)
-		return (errno = EIO, perror("./fdf <No Map>"), 1);
+		return (errno = EIO, perror("./fdf map invalid"), 1);
 	map = init_map(data, map_height);
 	if (map == NULL)
-		return (errno = EIO, perror("./fdf <No Map>"), 1);
+		return (errno = EIO, perror("./fdf map invalid"), 1);
 	p = init_img();
 	p.map = map;
 	init_input_hooks(&p);

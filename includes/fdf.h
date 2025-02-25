@@ -26,9 +26,6 @@
 # include <errno.h>
 # include <unistd.h>
 
-//fdf.c
-int				render_frames(t_p *p);
-
 //map_processing.c
 t_map			*create_map_matrix(t_list *data, t_map *map);
 int				get_map_width(char *line);

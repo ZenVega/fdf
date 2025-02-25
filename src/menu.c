@@ -13,8 +13,8 @@
 
 void	get_keys(t_menu *menu)
 {
-	menu->keys[0] = "rotate ";
-	menu->keys[1] = "rotate ";
+	menu->keys[0] = "rotate X";
+	menu->keys[1] = "rotate Y";
 	menu->keys[2] = "rotate Z";
 	menu->keys[3] = "start rotation";
 	menu->keys[4] = "stop rotation";

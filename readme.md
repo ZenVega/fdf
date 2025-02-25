@@ -1,13 +1,23 @@
-# Wireframe  - fdf
+# **Wireframe - fdf**  
 
-![rotating pylone](images/pylone.gif)
 
-This repo contains a graphical interfave build in C using the [minilibX] (https://harm-smits.github.io/42docs/libs/minilibx) library build on [X Window System (X11)] (https://x.org/wiki/)
-Pass a file with a format comparable to the ones in the maps folder to get it projected in a 3D-Wireframe.
+This repository contains a **graphical interface** built in **C** using the [MiniLibX](https://harm-smits.github.io/42docs/libs/minilibx) library, which is based on the [X Window System (X11)](https://x.org/wiki/).  
 
-## Installation
-In the root directory call `make`.
+![Rotating Pylon](images/pylone_high_fr.gif)
+
+Pass a file formatted similarly to those in the **maps** folder to visualize it as a **3D wireframe projection**.  
+
+![3D Diagram](images/t1.png)
+![Julia Fractal](images/julia.png)
+
+
+## **Installation**  
+To compile the program, run:  
+```sh
+make
+```
 You need the following libraries installed in order to properly compile it.
+`sudo apt-get install libxext-dev libx11-dev`
 
 ## Run
 If "fdf" was created simply execute it with `./fdf <mapfile>` , where mapfile can have any format as long as it follows the given structure:
